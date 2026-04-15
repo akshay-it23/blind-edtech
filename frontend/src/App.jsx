@@ -1,3 +1,6 @@
+import React from "react";
+import AppRoutes from "./routes/AppRoutes";
+
 export default function App() {
-  return <h1 className="text-red-500">Hello</h1>
+  return <AppRoutes />;
 }
