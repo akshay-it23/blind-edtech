@@ -35,7 +35,7 @@ export default function Sidebar() {
           <img src={logo} className="h-8 w-8" />
           {isSidebarOpen && (
             <span className="text-yellow-300 font-bold">
-              ShikshaSoladu.ai
+             Nav Drishti
             </span>
           )}
         </div>
