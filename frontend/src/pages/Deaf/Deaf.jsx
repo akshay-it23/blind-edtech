@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-
+import bgImage from "../../assets/dashback.png"
 import {
-  BarChart, Bar,
+  BarChart, LineChart, Bar, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from "recharts";
 
 import {
-  Calendar, Award, Clock, Book, Video,
-  MessageSquare, Star, Users, Zap
+  Calendar, Award, Book, Zap, Video, Clock
 } from "lucide-react";
 
 import Navbar from "./components/Navbar";
@@ -16,12 +15,12 @@ import Sidebar from "./components/Sidebar";
 export default function Deaf() {
 
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [activeTab, setActiveTab] = useState("progress");
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
-
     return () => clearInterval(timer);
   }, []);
 
@@ -38,6 +37,14 @@ export default function Deaf() {
     year: "numeric",
   });
 
+  const skillsData = [
+    { skill: "Fingerspelling", value: 85 },
+    { skill: "Common Signs", value: 72 },
+    { skill: "Sentence Flow", value: 60 },
+    { skill: "Facial Expressions", value: 55 },
+    { skill: "Comprehension", value: 78 },
+  ];
+
   const weeklyProgressData = [
     { day: "Mon", signLanguage: 30, visualLearning: 20, reading: 25 },
     { day: "Tue", signLanguage: 40, visualLearning: 30, reading: 35 },
@@ -48,17 +55,29 @@ export default function Deaf() {
     { day: "Sun", signLanguage: 90, visualLearning: 60, reading: 70 },
   ];
 
-  const [activeTab, setActiveTab] = useState("progress");
+  const monthlyProgressData = [
+    { month: "Jan", progress: 40 },
+    { month: "Feb", progress: 55 },
+    { month: "Mar", progress: 60 },
+    { month: "Apr", progress: 70 },
+    { month: "May", progress: 80 },
+    { month: "Jun", progress: 90 },
+  ];
 
   return (
     <div className="flex h-screen bg-gray-50">
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-10"
+        style={{ backgroundImage: `url(${bgImage})` }}
+      ></div>
 
       <Sidebar />
 
       <div className="flex flex-col flex-1 overflow-hidden">
-
         <Navbar />
-<div className="bg-gradient-to-b from-purple-100 via-purple-50 to-black/10 flex-1 overflow-y-auto p-6 ml-64 mt-14">
+
+        <div className="flex-1 overflow-y-auto p-6 ml-64 mt-14">
+
           <h1 className="text-4xl font-bold text-blue-600">
             Welcome back, <span className="text-indigo-700">Akshay!</span>
           </h1>
@@ -69,7 +88,6 @@ export default function Deaf() {
           </div>
 
           <div className="flex gap-6 mt-6 border-b pb-2">
-
             <button
               onClick={() => setActiveTab("progress")}
               className={activeTab === "progress"
@@ -96,23 +114,214 @@ export default function Deaf() {
             >
               Achievements
             </button>
-
           </div>
 
           {activeTab === "progress" && (
-            <div className="mt-6 h-80">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={weeklyProgressData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="day" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="signLanguage" fill="#6366f1" />
-                  <Bar dataKey="visualLearning" fill="#10b981" />
-                  <Bar dataKey="reading" fill="#f59e0b" />
-                </BarChart>
-              </ResponsiveContainer>
+            <div className="mt-6 space-y-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                {/* LEFT - HORIZONTAL BAR CHART */}
+                <div className="bg-white p-6 rounded-xl shadow-md">
+                  <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
+                    <Video /> Sign Language Proficiency
+                  </h2>
+
+                  <ResponsiveContainer width="100%" height={300}>
+                    <BarChart layout="vertical" data={skillsData}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis type="number" domain={[0, 100]} />
+                      <YAxis dataKey="skill" type="category" />
+                      <Tooltip />
+                      <Bar dataKey="value" fill="#6366f1" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+
+                {/* RIGHT - VOCABULARY CARD */}
+                <div className="bg-white p-6 rounded-xl shadow-md">
+                  <h2 className="text-xl font-semibold mb-4">Vocabulary Progress</h2>
+
+                  <div className="mb-4">
+                    <div className="flex justify-between text-sm">
+                      <span>Common Phrases</span>
+                      <span>156/200 (78%)</span>
+                    </div>
+                    <div className="w-full bg-gray-200 h-2 rounded-full mt-1">
+                      <div className="bg-indigo-600 h-2 rounded-full w-[78%]"></div>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <div className="flex justify-between text-sm">
+                      <span>Academic Terms</span>
+                      <span>94/150 (63%)</span>
+                    </div>
+                    <div className="w-full bg-gray-200 h-2 rounded-full mt-1">
+                      <div className="bg-indigo-600 h-2 rounded-full w-[63%]"></div>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <div className="flex justify-between text-sm">
+                      <span>Professional Vocabulary</span>
+                      <span>52/120 (43%)</span>
+                    </div>
+                    <div className="w-full bg-gray-200 h-2 rounded-full mt-1">
+                      <div className="bg-indigo-600 h-2 rounded-full w-[43%]"></div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between text-sm">
+                      <span>Cultural References</span>
+                      <span>78/100 (78%)</span>
+                    </div>
+                    <div className="w-full bg-gray-200 h-2 rounded-full mt-1">
+                      <div className="bg-indigo-600 h-2 rounded-full w-[78%]"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white p-6 rounded-xl shadow-md">
+                <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
+                  <Clock /> Recent Practice Sessions
+                </h2>
+
+                <table className="w-full text-left">
+                  <thead className="bg-indigo-50">
+                    <tr>
+                      <th className="p-2">Date</th>
+                      <th className="p-2">Session Type</th>
+                      <th className="p-2">Duration</th>
+                      <th className="p-2">Accuracy</th>
+                      <th className="p-2">Review</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="hover:bg-indigo-50">
+                      <td className="p-2">Mar 10</td>
+                      <td className="p-2">Alphabet Practice</td>
+                      <td className="p-2">30min</td>
+                      <td className="p-2 text-green-600 font-semibold">85%</td>
+                      <td className="p-2 text-indigo-600 cursor-pointer">Review</td>
+                    </tr>
+                    <tr className="hover:bg-indigo-50">
+                      <td className="p-2">Mar 9</td>
+                      <td className="p-2">Word Formation</td>
+                      <td className="p-2">25min</td>
+                      <td className="p-2 text-yellow-600 font-semibold">72%</td>
+                      <td className="p-2 text-indigo-600 cursor-pointer">Review</td>
+                    </tr>
+                    <tr className="hover:bg-indigo-50">
+                      <td className="p-2">Mar 8</td>
+                      <td className="p-2">Sentence Practice</td>
+                      <td className="p-2">40min</td>
+                      <td className="p-2 text-green-600 font-semibold">88%</td>
+                      <td className="p-2 text-indigo-600 cursor-pointer">Review</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="bg-white p-6 rounded-xl shadow-md">
+                <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
+                  <Zap /> Weekly Learning Activity
+                </h2>
+
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={weeklyProgressData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="day" />
+                    <YAxis label={{ value: "Minutes Spent", angle: -90, position: "insideLeft" }} />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="signLanguage" fill="#6366f1" />
+                    <Bar dataKey="visualLearning" fill="#f59e0b" />
+                    <Bar dataKey="reading" fill="#10b981" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-md">
+                  <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
+                    <Book /> Monthly Progress
+                  </h2>
+
+                  <ResponsiveContainer width="100%" height={300}>
+                    <LineChart data={monthlyProgressData}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="month" />
+                      <YAxis />
+                      <Tooltip />
+                      <Line type="monotone" dataKey="progress" stroke="#6366f1" strokeWidth={2} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+
+                <div className="bg-white p-6 rounded-xl shadow-md">
+                  <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
+                    <Award /> Points Summary
+                  </h2>
+
+                  <p className="text-4xl font-bold text-indigo-700">3,845</p>
+
+                  <div className="flex justify-between mt-4 text-sm text-gray-600">
+                    <span>This Week: 275</span>
+                    <span>Daily Avg: 39</span>
+                  </div>
+
+                  <div className="mt-4">
+                    <div className="w-full bg-gray-200 h-3 rounded-full">
+                      <div className="bg-indigo-600 h-3 rounded-full w-[78%]"></div>
+                    </div>
+                    <p className="text-sm mt-2 text-gray-600">122 points until Level 8</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white p-6 rounded-xl shadow-md">
+                <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
+                  <Calendar /> Upcoming Lessons
+                </h2>
+
+                <table className="w-full text-left">
+                  <thead className="bg-indigo-50">
+                    <tr>
+                      <th className="p-2">Lesson</th>
+                      <th className="p-2">Type</th>
+                      <th className="p-2">Date</th>
+                      <th className="p-2">Duration</th>
+                      <th className="p-2">Points</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="hover:bg-indigo-50">
+                      <td className="p-2">Advanced Signing Practice</td>
+                      <td className="p-2 text-blue-600">Live Session</td>
+                      <td className="p-2">Today 4PM</td>
+                      <td className="p-2">45min</td>
+                      <td className="p-2">50pts</td>
+                    </tr>
+                    <tr className="hover:bg-indigo-50">
+                      <td className="p-2">Visual Storytelling</td>
+                      <td className="p-2 text-green-600">On-demand</td>
+                      <td className="p-2">Tomorrow</td>
+                      <td className="p-2">30min</td>
+                      <td className="p-2">35pts</td>
+                    </tr>
+                    <tr className="hover:bg-indigo-50">
+                      <td className="p-2">STEM Vocabulary</td>
+                      <td className="p-2 text-purple-600">Interactive</td>
+                      <td className="p-2">Mar 16</td>
+                      <td className="p-2">60min</td>
+                      <td className="p-2">70pts</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
             </div>
           )}
 
