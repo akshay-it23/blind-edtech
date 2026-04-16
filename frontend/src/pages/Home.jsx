@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import logo1 from "../assets/main.png";
 import back from "../assets/background.png";
 
+
 export default function Home() {
        const [voiceEnabled, setVoiceEnabled] = useState(false);
 const navigate = useNavigate();
