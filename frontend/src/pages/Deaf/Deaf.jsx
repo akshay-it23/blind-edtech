@@ -66,8 +66,8 @@ export default function Deaf() {
 
   return (
     <div className="flex h-screen bg-gray-50">
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-10"
+<div
+  className="absolute inset-0 bg-cover bg-center opacity-10 pointer-events-none"
         style={{ backgroundImage: `url(${bgImage})` }}
       ></div>
 
@@ -97,6 +97,15 @@ export default function Deaf() {
               Learning Progress
             </button>
 
+
+
+
+
+
+
+
+
+
             <button
               onClick={() => setActiveTab("skills")}
               className={activeTab === "skills"
@@ -116,14 +125,83 @@ export default function Deaf() {
             </button>
           </div>
 
+{activeTab === "achievements" && (
+  <div className="mt-6 space-y-8">
+
+    <h2 className="text-2xl font-semibold flex items-center gap-2">
+      <Award /> Your Achievements
+    </h2>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      {/* Badge 1 */}
+      <div className="bg-white p-4 rounded-xl shadow border-l-4 border-indigo-500">
+        <h3 className="font-semibold">Signing Scholar</h3>
+      </div>
+
+      {/* Badge 2 */}
+      <div className="bg-white p-4 rounded-xl shadow border-l-4 border-yellow-400">
+        <h3 className="font-semibold">Perfect Streak</h3>
+      </div>
+
+      {/* Badge 3 */}
+      <div className="bg-white p-4 rounded-xl shadow border-l-4 border-green-500">
+        <h3 className="font-semibold">Community Guide</h3>
+      </div>
+
+    </div>
+
+  </div>
+)}
+
+
+{activeTab === "skills" && (
+  <div className="mt-6 space-y-8">
+
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+      {/* LEFT - CHART */}
+      <div className="bg-white p-6 rounded-xl shadow-md">
+        <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
+          <Video /> Sign Language Proficiency
+        </h2>
+
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart layout="vertical" data={skillsData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis type="number" domain={[0, 100]} />
+            <YAxis dataKey="skill" type="category" />
+            <Tooltip />
+            <Bar dataKey="value" fill="#6366f1" />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* RIGHT */}
+      <div className="bg-white p-6 rounded-xl shadow-md">
+        <h2 className="text-xl font-semibold mb-4">Vocabulary Progress</h2>
+        <p>Common Phrases - 78%</p>
+        <p>Academic Terms - 63%</p>
+      </div>
+
+    </div>
+
+  </div>
+)}
+
+
+
+
+
+
           {activeTab === "progress" && (
             <div className="mt-6 space-y-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-8"> */}
 
                 {/* LEFT - HORIZONTAL BAR CHART */}
-                <div className="bg-white p-6 rounded-xl shadow-md">
+                {/* <div className="bg-white p-6 rounded-xl shadow-md">
                   <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
-                    <Video /> Sign Language Proficiency
+                 
                   </h2>
 
                   <ResponsiveContainer width="100%" height={300}>
@@ -135,13 +213,13 @@ export default function Deaf() {
                       <Bar dataKey="value" fill="#6366f1" />
                     </BarChart>
                   </ResponsiveContainer>
-                </div>
+                </div> */}
 
                 {/* RIGHT - VOCABULARY CARD */}
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <h2 className="text-xl font-semibold mb-4">Vocabulary Progress</h2>
+                {/* <div className="bg-white p-6 rounded-xl shadow-md"> */}
+                  {/* <h2 className="text-xl font-semibold mb-4">Vocabulary Progress</h2> */}
 
-                  <div className="mb-4">
+                  {/* <div className="mb-4">
                     <div className="flex justify-between text-sm">
                       <span>Common Phrases</span>
                       <span>156/200 (78%)</span>
@@ -149,9 +227,9 @@ export default function Deaf() {
                     <div className="w-full bg-gray-200 h-2 rounded-full mt-1">
                       <div className="bg-indigo-600 h-2 rounded-full w-[78%]"></div>
                     </div>
-                  </div>
+                  </div> */}
 
-                  <div className="mb-4">
+                  {/* <div className="mb-4">
                     <div className="flex justify-between text-sm">
                       <span>Academic Terms</span>
                       <span>94/150 (63%)</span>
@@ -159,9 +237,9 @@ export default function Deaf() {
                     <div className="w-full bg-gray-200 h-2 rounded-full mt-1">
                       <div className="bg-indigo-600 h-2 rounded-full w-[63%]"></div>
                     </div>
-                  </div>
+                  </div> */}
 
-                  <div className="mb-4">
+                  {/* <div className="mb-4">
                     <div className="flex justify-between text-sm">
                       <span>Professional Vocabulary</span>
                       <span>52/120 (43%)</span>
@@ -169,9 +247,9 @@ export default function Deaf() {
                     <div className="w-full bg-gray-200 h-2 rounded-full mt-1">
                       <div className="bg-indigo-600 h-2 rounded-full w-[43%]"></div>
                     </div>
-                  </div>
+                  </div> */}
 
-                  <div>
+                  {/* <div>
                     <div className="flex justify-between text-sm">
                       <span>Cultural References</span>
                       <span>78/100 (78%)</span>
@@ -179,9 +257,9 @@ export default function Deaf() {
                     <div className="w-full bg-gray-200 h-2 rounded-full mt-1">
                       <div className="bg-indigo-600 h-2 rounded-full w-[78%]"></div>
                     </div>
-                  </div>
-                </div>
-              </div>
+                  </div> */}
+                {/* </div>
+              </div> */}
 
               <div className="bg-white p-6 rounded-xl shadow-md">
                 <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
