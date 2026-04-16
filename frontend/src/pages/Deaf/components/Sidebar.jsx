@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
+import { Link } from "react-router-dom";
+import { Bell } from "lucide-react";
 import {
   Home,
   BarChart2,
@@ -24,7 +25,7 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`bg-indigo-700 h-full fixed top-0 left-0 z-50 transition-all ${
+      className={`bg-gradient-to-b from-purple-600 to-black h-full fixed top-0 left-0 z-50 transition-all ${
         isSidebarOpen ? "w-64" : "w-20"
       }`}
     >
