@@ -1,4 +1,5 @@
 import React,{useEffect,useState} from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Globe, Book, Ear, Eye, Users } from "lucide-react";
@@ -8,7 +9,7 @@ import back from "../assets/background.png";
 
 
 export default function Home() {
-       const [voiceEnabled, setVoiceEnabled] = useState(false);
+  const [voiceEnabled] = useState(false);
 const navigate = useNavigate();
 
 

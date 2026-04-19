@@ -1,2 +1,5 @@
-import React from "react";
-export default function SignLangDetection() { return <div>SignLangDetection</div>; }
+const SignLanguageDetection = () => {
+return <div>Fingerspelling Detection</div>; // camera later
+};
+
+export default SignLanguageDetection;

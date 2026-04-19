@@ -1,17 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 
 export default function DProfile() {
-
-  // 🔥 STATES
-  const [user, setUser] = useState(null);
-  const [progress, setProgress] = useState(null);
-
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-
-  // 🔥 FETCH USER
- useEffect(() => {
 
   const dummyUser = {
     name: "Akshay",
@@ -29,12 +19,12 @@ export default function DProfile() {
     ]
   };
 
-  setUser(dummyUser);
-  setName(dummyUser.name);
-  setEmail(dummyUser.email);
-  setProgress(dummyProgress);
+  // 🔥 STATES
+  const [user] = useState(dummyUser);
+  const [progress] = useState(dummyProgress);
 
-}, []);
+  const [name, setName] = useState(dummyUser.name);
+  const [email, setEmail] = useState(dummyUser.email);
 
   // 🔥 SAVE PROFILE
   const handleSave = () => {

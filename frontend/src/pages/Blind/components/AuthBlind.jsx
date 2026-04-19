@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function AuthBlind() {
   const [secretWord] = useState("open");
-  const [feedback, setFeedback] = useState("");
-  const [attemptCount, setAttemptCount] = useState(0);
   const navigate = useNavigate();
   const {
     transcript,
@@ -13,6 +11,11 @@ export default function AuthBlind() {
     resetTranscript,
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
+  const normalizedTranscript = transcript.toLowerCase();
+  const feedback =
+    normalizedTranscript.length > 10 && !normalizedTranscript.includes(secretWord)
+      ? "Try again"
+      : "";
 
   const speak = (text) => {
     const utterance = new SpeechSynthesisUtterance(text);
@@ -34,7 +37,7 @@ export default function AuthBlind() {
   useEffect(() => {
     if (!transcript) return;
 
-    const text = transcript.toLowerCase();
+    const text = normalizedTranscript;
 
     if (text.includes(secretWord)) {
       playAudio(800);
@@ -46,17 +49,7 @@ export default function AuthBlind() {
       return;
     }
 
-    if (text.length > 10) {
-      setAttemptCount((prev) => {
-        const next = prev + 1;
-        if (next >= 3) {
-          speak("Hint: it rhymes with hope");
-        }
-        return next;
-      });
-      setFeedback("Try again");
-    }
-  }, [navigate, secretWord, transcript]);
+  }, [navigate, normalizedTranscript, secretWord, transcript]);
 
   useEffect(() => {
     if (!browserSupportsSpeechRecognition) return;
@@ -127,7 +120,6 @@ export default function AuthBlind() {
         </div>
 
         <p className="mt-4 text-sm">Press space to toggle mic</p>
-        {attemptCount > 0 && <p className="mt-2 text-xs">Attempts: {attemptCount}</p>}
       </div>
     </div>
   );

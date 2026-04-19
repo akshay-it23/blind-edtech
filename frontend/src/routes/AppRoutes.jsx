@@ -44,6 +44,7 @@ export default function AppRoutes() {
         <Route path="/authdeaf" element={<Auth />} />
         <Route path="/deaf" element={<Deaf />} />
         <Route path="/signlang" element={<SignLanguage />} />
+        <Route path="/deaf/sign-language" element={<SignLanguage />} />
         <Route path="/visual-learning" element={<VisualLearning />} />
         <Route path="/gamification-deaf" element={<Gamification />} />
         <Route path="/community-deaf" element={<Community />} />

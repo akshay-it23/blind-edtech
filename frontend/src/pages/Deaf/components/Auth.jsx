@@ -9,12 +9,10 @@ export default function Auth() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const lastCaptureRef = useRef({ letter: "", time: 0 });
+  const isAuthenticatingRef = useRef(false);
 
-  const [detectedSequence, setDetectedSequence] = useState([]);
-  const [handDetected, setHandDetected] = useState(false);
-  const [letterRecognized, setLetterRecognized] = useState("");
-  const [progressPercentage, setProgressPercentage] = useState(0);
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const [detectedSequence] = useState([]);
+  const [progressPercentage] = useState(0);
 
   const PASSWORD = "AB";
   const navigate = useNavigate();
@@ -94,53 +92,23 @@ export default function Auth() {
 
   useEffect(() => {
     const current = detectedSequence.join("");
-    if (current.length !== PASSWORD.length || isAuthenticating) return;
+    if (current.length !== PASSWORD.length || isAuthenticatingRef.current) return;
 
-    setIsAuthenticating(true);
+    isAuthenticatingRef.current = true;
 
     if (current === PASSWORD) {
       toast.success("Authenticated successfully");
       setTimeout(() => navigate("/deaf"), 800);
     } else {
       toast.error("Wrong sign password");
-      setDetectedSequence([]);
-      setProgressPercentage(0);
       lastCaptureRef.current = { letter: "", time: 0 };
     }
 
-    const timer = setTimeout(() => setIsAuthenticating(false), 800);
+    const timer = setTimeout(() => {
+      isAuthenticatingRef.current = false;
+    }, 800);
     return () => clearTimeout(timer);
-  }, [detectedSequence, isAuthenticating, navigate]);
-
-  const drawLandmarks = (ctx, lm) => {
-    lm.forEach((p) => {
-      ctx.beginPath();
-      ctx.arc(p.x * 640, p.y * 480, 4, 0, 2 * Math.PI);
-      ctx.fillStyle = "blue";
-      ctx.fill();
-    });
-
-    // mpHands.HAND_CONNECTIONS.forEach(([s, e]) => {
-    //   const sp = lm[s];
-    //   const ep = lm[e];
-    //   ctx.beginPath();
-    //   ctx.moveTo(sp.x * 640, sp.y * 480);
-    //   ctx.lineTo(ep.x * 640, ep.y * 480);
-    //   ctx.strokeStyle = "cyan";
-    //   ctx.stroke();
-    // });
-  };
-
-  const detectSignLanguageLetter = (lm) => {
-    const thumb = lm[4];
-    const index = lm[8];
-    const middle = lm[12];
-
-    if (thumb.y < index.y && thumb.y < middle.y) return "A";
-    if (thumb.y > index.y && index.y < middle.y) return "B";
-
-    return "";
-  };
+  }, [detectedSequence, navigate]);
 
   return (
     <div style={{ padding: 16 }}>
@@ -162,8 +130,8 @@ export default function Auth() {
         />
       </div>
 
-      <p>Hand: {handDetected ? "Detected" : "Not detected"}</p>
-      <p>Letter: {letterRecognized || "-"}</p>
+      <p>Hand: Not detected</p>
+      <p>Letter: -</p>
       <p>Sequence: {detectedSequence.join("") || "-"}</p>
       <p>Progress: {Math.round(progressPercentage)}%</p>
 
