@@ -4,14 +4,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Global
 import Home from "../pages/Home";
 import Home1 from "../pages/Alluser/Home1";
-
+import Community from "../pages/Deaf/pages/Community";
 // Deaf
 import Deaf from "../pages/Deaf/Deaf";
 import Auth from "../pages/Deaf/components/Auth";
 import SignLanguage from "../pages/Deaf/pages/SignLanguage";
 import VisualLearning from "../pages/Deaf/pages/VisualLearning";
 import Gamification from "../pages/Deaf/pages/Gamification";
-import Community from "../pages/Deaf/pages/Community";
+
 import Accessibility from "../pages/Deaf/pages/Accessibility";
 import Canvas from "../pages/Deaf/pages/Canvas";
 import Meet from "../pages/Deaf/pages/Meet";
@@ -19,7 +19,7 @@ import PlanYourDay from "../pages/Deaf/pages/PlanYourDay";
 import DProfile from "../pages/Deaf/components/DProfile";
 import Signgame from "../pages/Deaf/components/Signgame";
 import SentanceGames from "../pages/Deaf/components/SentanceGames";
-
+import InteractiveQuiz from "../pages/Deaf/components/InteractiveQuiz";
 // Blind
 import AuthBlind from "../pages/Blind/components/AuthBlind";
 import BlindHub from "../pages/Blind/pages/Blind";
@@ -47,13 +47,14 @@ export default function AppRoutes() {
         <Route path="/deaf/sign-language" element={<SignLanguage />} />
         <Route path="/visual-learning" element={<VisualLearning />} />
         <Route path="/gamification-deaf" element={<Gamification />} />
-        <Route path="/community-deaf" element={<Community />} />
+        <Route path="/community" element={<Community />} />
         <Route path="/accessibility" element={<Accessibility />} />
         <Route path="/dprofile" element={<DProfile />} />
         <Route path="/canvas" element={<Canvas />} />
         <Route path="/signgame" element={<Signgame />} />
         <Route path="/deaf-meet" element={<Meet />} />
         <Route path="/deaf-planyourday" element={<PlanYourDay />} />
+           <Route path="/deaf/interactive" element={<InteractiveQuiz />} />
         <Route path="/game2" element={<SentanceGames />} />
    
 
