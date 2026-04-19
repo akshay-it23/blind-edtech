@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+
 
 import { Link } from "react-router-dom";
-import { Bell } from "lucide-react";
+import { Bell, CalendarRangeIcon } from "lucide-react";
 import {
   Home,
   BarChart2,
@@ -22,6 +25,7 @@ import logo from "../../../assets/image.png";
 export default function Sidebar() {
   const [isGamificationOpen, setIsGamificationOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+const navigate = useNavigate();
 
   return (
     <div
@@ -53,6 +57,10 @@ export default function Sidebar() {
           <Home />
           {isSidebarOpen && <span>Home</span>}
         </Link>
+        <Link to="/deaf-planyourday" className="flex items-center gap-3 hover:text-yellow-300">
+  <CalendarRangeIcon />
+  {isSidebarOpen && <span>Plan your day </span>}
+</Link>
 
         <Link to="/deaf/sign-language" className="flex items-center gap-3 hover:text-yellow-300">
           <Clipboard />

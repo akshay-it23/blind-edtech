@@ -1,18 +1,18 @@
 import { useState } from "react";
 import bgImage from "../assets/back.png";
 import Sidebar from "../components/Sidebar";
-import SignLanguageDetection from "../components/SignLangDetection";
 import SignLanguageTranslator from "../components/SignLanguageTranslator";
 import SignLanguageDictionary from "../components/SignLanguageDictionary";
 import Fingerspell from "../components/Fingerspell";
+
 const tabs = [
   { id: "dictionary", label: "Dictionary" },
   { id: "translator", label: "Translator" },
-  { id: "fingerspelling", label: "Detection" },
+  { id: "fingerspelling", label: "Fingerspelling" },
 ];
 
 export default function SignLanguage() {
-  const [activeTab, setActiveTab] = useState("dictionary");
+  const [activeTab, setActiveTab] = useState("fingerspelling");
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -28,7 +28,7 @@ export default function SignLanguage() {
         <div className="relative z-10 p-6 md:p-8">
           <h1 className="text-3xl md:text-4xl font-bold mb-2">Sign Language Lab</h1>
           <p className="text-slate-200 mb-6">
-            Practice signs with dictionary lookup, translation, and live detection.
+            Practice signs with dictionary lookup, translation, and fingerspelling drills.
           </p>
 
           <div className="flex flex-wrap gap-3 mb-6">

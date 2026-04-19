@@ -55,6 +55,7 @@ export default function AppRoutes() {
         <Route path="/deaf-meet" element={<Meet />} />
         <Route path="/deaf-planyourday" element={<PlanYourDay />} />
         <Route path="/game2" element={<SentanceGames />} />
+   
 
         {/* Blind */}
         <Route path="/authblind" element={<AuthBlind />} />
