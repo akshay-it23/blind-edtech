@@ -54,7 +54,7 @@ export default function Sidebar() {
           {isSidebarOpen && <span>Home</span>}
         </Link>
 
-        <Link to="/signlang" className="flex items-center gap-3 hover:text-yellow-300">
+        <Link to="/deaf/sign-language" className="flex items-center gap-3 hover:text-yellow-300">
           <Clipboard />
           {isSidebarOpen && <span>Sign Language</span>}
         </Link>
