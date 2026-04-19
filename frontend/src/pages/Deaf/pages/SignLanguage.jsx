@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar";
 import SignLanguageDetection from "../components/SignLangDetection";
 import SignLanguageTranslator from "../components/SignLanguageTranslator";
 import SignLanguageDictionary from "../components/SignLanguageDictionary";
-
+import Fingerspell from "../components/Fingerspell";
 const tabs = [
   { id: "dictionary", label: "Dictionary" },
   { id: "translator", label: "Translator" },
@@ -49,8 +49,9 @@ export default function SignLanguage() {
 
           <section className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur-md p-4 md:p-6 min-h-[65vh]">
             {activeTab === "dictionary" && <SignLanguageDictionary />}
+            {activeTab === "fingerspelling" && <Fingerspell />}
             {activeTab === "translator" && <SignLanguageTranslator />}
-            {activeTab === "fingerspelling" && <SignLanguageDetection />}
+
           </section>
         </div>
       </main>
