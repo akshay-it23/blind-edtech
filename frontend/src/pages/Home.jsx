@@ -110,11 +110,7 @@ useEffect(() => {
           <div className="w-1/2 pr-8">
        
 
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              className="w-16 h-16 bg-orange-500 rounded-full mb-6"
-            />
+
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -242,10 +238,10 @@ useEffect(() => {
 {/* //card khtm */}<motion.div
   initial={{ y: 50, opacity: 0 }}
   animate={{ y: 0, opacity: 1 }}
-  className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl p-8 mt-16"
+  className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl p-8 mt-16 max-w-5xl mx-auto"
 >
 
-  <h2 className="text-3xl  font-bold mb-2">
+  <h2 className="text-3xl font-bold mb-2 text-white">
     Find Your Right Mentor
   </h2>
 
@@ -270,8 +266,9 @@ useEffect(() => {
         </div>
 
         <motion.img
-          src="/blindboy.jpg"
-          className="w-full rounded-lg mt-12"
+          src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&q=80&w=800"
+          alt="Mentor Student"
+          className="w-full h-48 object-cover rounded-lg mt-12"
         />
 
       </div>

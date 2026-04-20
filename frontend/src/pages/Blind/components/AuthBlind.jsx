@@ -83,10 +83,24 @@ export default function AuthBlind() {
 
   if (!browserSupportsSpeechRecognition) {
     return (
-      <div>
-        <input placeholder="Enter secret word" />
-        <button>Submit</button>
-        <p>{feedback}</p>
+      <div className="h-screen bg-gray-900 text-white flex items-center justify-center">
+        <div className="bg-gray-800 p-8 rounded-xl shadow-lg max-w-md w-full text-center">
+          <h1 className="text-2xl font-bold mb-6">Voice Authentication Not Supported</h1>
+          <p className="mb-4">Your browser does not support speech recognition. Please enter the secret password below.</p>
+          <div className="flex flex-col gap-4">
+             <input 
+               type="text"
+               placeholder="Enter secret word" 
+               className="w-full bg-gray-700 text-white border border-gray-600 rounded-lg p-3 outline-none focus:ring-2 focus:ring-indigo-500"
+               onChange={(e) => {
+                 if(e.target.value.toLowerCase() === secretWord) {
+                     navigate("/mainblind");
+                 }
+               }}
+             />
+             {feedback && <p className="text-red-400 text-sm">{feedback}</p>}
+          </div>
+        </div>
       </div>
     );
   }
