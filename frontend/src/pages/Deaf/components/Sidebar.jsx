@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 
 import { Link } from "react-router-dom";
-import { Bell, CalendarRangeIcon } from "lucide-react";
+import { Bell, Calendar } from "lucide-react";
 import {
   Home,
   BarChart2,
@@ -18,7 +18,6 @@ import {
   ChevronUp,
   ChevronLeft,
   ChevronRight,
-  Calendar,
 } from "lucide-react";
 
 import logo from "../../../assets/image.png";
@@ -58,7 +57,7 @@ const navigate = useNavigate();
           {isSidebarOpen && <span>Home</span>}
         </Link>
         <Link to="/deaf-planyourday" className="flex items-center gap-3 hover:text-yellow-300">
-  <CalendarRangeIcon />
+  <Calendar />
   {isSidebarOpen && <span>Plan your day </span>}
 </Link>
 

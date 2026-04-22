@@ -16,11 +16,19 @@ export default function Deaf() {
 
   const [currentTime, setCurrentTime] = useState(new Date());
   const [activeTab, setActiveTab] = useState("progress");
+  const [userData, setUserData] = useState({ name: "Akshay", points: 3845, level: 7 });
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
+
+    // Fetch user data from local API
+    fetch("http://localhost:5050/api/users/u1")
+      .then(res => res.json())
+      .then(data => setUserData(data))
+      .catch(err => console.log("Backend not running, using mock data"));
+
     return () => clearInterval(timer);
   }, []);
 
@@ -78,8 +86,8 @@ export default function Deaf() {
 
         <div className="flex-1 overflow-y-auto p-6 ml-64 mt-14">
 
-          <h1 className="text-4xl font-bold text-blue-600">
-            Welcome back, <span className="text-indigo-700">Akshay!</span>
+          <h1 className="text-4xl font-black text-slate-900 tracking-tight">
+            Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 underline decoration-yellow-400 decoration-4 underline-offset-8">{userData.name}!</span>
           </h1>
 
           <div className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-6 rounded-xl shadow mt-6">
@@ -279,18 +287,18 @@ export default function Deaf() {
                     <Award /> Points Summary
                   </h2>
 
-                  <p className="text-4xl font-bold text-indigo-700">3,845</p>
+                  <p className="text-5xl font-black text-indigo-700 font-mono tracking-tighter">{userData.points.toLocaleString()}</p>
 
-                  <div className="flex justify-between mt-4 text-sm text-gray-600">
-                    <span>This Week: 275</span>
-                    <span>Daily Avg: 39</span>
+                  <div className="flex justify-between mt-6 text-sm font-bold uppercase tracking-widest text-gray-400">
+                    <span>This Week: +275</span>
+                    <span>Level {userData.level}</span>
                   </div>
 
                   <div className="mt-4">
-                    <div className="w-full bg-gray-200 h-3 rounded-full">
-                      <div className="bg-indigo-600 h-3 rounded-full w-[78%]"></div>
+                    <div className="w-full bg-gray-100 h-4 rounded-full overflow-hidden border border-gray-200">
+                      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 h-full w-[78%] animate-pulse"></div>
                     </div>
-                    <p className="text-sm mt-2 text-gray-600">122 points until Level 8</p>
+                    <p className="text-sm mt-3 text-gray-500 font-medium italic">Only 122 points until Level {userData.level + 1}!</p>
                   </div>
                 </div>
               </div>

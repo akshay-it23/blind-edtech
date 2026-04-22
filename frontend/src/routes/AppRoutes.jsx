@@ -30,6 +30,7 @@ import DevTools from "../pages/Blind/components/DevTools";
 import Aitutor from "../pages/Blind/components/Aitutor";
 import Game1 from "../pages/Blind/components/Game1";
 import YoutubeSummary from "../pages/Blind/components/YoutubeSummary";
+import PDFReader from "../pages/Blind/components/PDFReader";
 
 export default function AppRoutes() {
   return (
@@ -62,6 +63,7 @@ export default function AppRoutes() {
         <Route path="/authblind" element={<AuthBlind />} />
         <Route path="/mainblind" element={<BlindHub />} />
         <Route path="/blindvideos" element={<Videos />} />
+        <Route path="/blindreader" element={<PDFReader />} />
         <Route path="/blindsubtitle" element={<SubtitleGenerator />} />
         <Route path="/blindcode" element={<CodeViewer />} />
         <Route path="/blinddev" element={<DevTools />} />

@@ -9,56 +9,89 @@ import back from "../assets/background.png";
 
 
 export default function Home() {
-  const [voiceEnabled] = useState(false);
-const navigate = useNavigate();
+  const [voiceEnabled] = useState(true);
+  const [welcomeSpoken, setWelcomeSpoken] = useState(false);
+  const navigate = useNavigate();
 
+  const speak = (text) => {
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.9;
+      window.speechSynthesis.speak(utterance);
+    }
+  };
 
-useEffect(() => {
-  if (!voiceEnabled) return;
+  useEffect(() => {
+    const handleFirstInteraction = () => {
+      if (!welcomeSpoken) {
+        speak(
+          "Welcome to Nav-Drishti-dot-A-I. Your inclusive learning companion. Say 'Blind' to go to the audio-guided section, or say 'Deaf' for the visual learning portal. You can also press B for Blind or D for Deaf."
+        );
+        setWelcomeSpoken(true);
+      }
+    };
 
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
+    window.addEventListener("mousedown", handleFirstInteraction);
+    window.addEventListener("keydown", handleFirstInteraction);
 
-  if (!SpeechRecognition) {
-    console.log("Not supported");
-    return;
-  }
+    return () => {
+      window.removeEventListener("mousedown", handleFirstInteraction);
+      window.removeEventListener("keydown", handleFirstInteraction);
+    };
+  }, [welcomeSpoken]);
 
-  const recognition = new SpeechRecognition();
-// webapi speech api name ki ek library in built hote h  jisa ya use kr ta h
+  useEffect(() => {
+    if (!voiceEnabled) return;
 
-  recognition.continuous = true;
-  recognition.interimResults = false;
-  recognition.lang = "en-US";
-// ya auto matic humar esystem k mic on krvade ga
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
 
-  recognition.start();
+    if (!SpeechRecognition) return;
 
-  recognition.onresult = (event) => {
-    const transcript =
-      event.results[event.results.length - 1][0].transcript
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = false;
+    recognition.lang = "en-US";
+
+    try {
+      recognition.start();
+    } catch (e) {
+      console.log("Recognition already started");
+    }
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[event.results.length - 1][0].transcript
         .toLowerCase()
         .trim();
 
-    console.log("Heard:", transcript);
+      if (transcript.includes("blind")) {
+        speak("Navigating to Blind Section");
+        navigate("/authblind");
+      } else if (transcript.includes("deaf")) {
+        speak("Navigating to Deaf Section");
+        navigate("/authdeaf");
+      }
+    };
 
-    if (transcript.includes("blind")) {
-      navigate("/authblind");
-    }
+    // Keyboard shortcuts as backup
+    const handleKeys = (e) => {
+      if (e.key.toLowerCase() === 'b') {
+          speak("Navigating to Blind Section");
+          navigate("/authblind");
+      }
+      if (e.key.toLowerCase() === 'd') {
+          speak("Navigating to Deaf Section");
+          navigate("/authdeaf");
+      }
+    };
+    window.addEventListener("keydown", handleKeys);
 
-    if (transcript.includes("deaf")) {
-      navigate("/authdeaf");
-    }
-  };
-
-  recognition.onerror = (e) => {
-    console.log("Error:", e);
-  };
-
-  return () => {
-    recognition.stop();
-  };
-}, [voiceEnabled, navigate]);
+    return () => {
+      recognition.stop();
+      window.removeEventListener("keydown", handleKeys);
+    };
+  }, [voiceEnabled, navigate]);
 
   return (
     <div
