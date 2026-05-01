@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { Plus, Trash2, GripVertical, CheckCircle2, Clock, ListTodo } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function KanbanBoard() {
   const [columns, setColumns] = useState({
@@ -73,7 +74,11 @@ export default function KanbanBoard() {
 
   return (
     <div className="flex flex-col gap-8 text-white h-full">
-      <header className="flex justify-between items-center bg-white/5 p-6 rounded-3xl border border-white/10">
+      <motion.header 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex justify-between items-center bg-white/5 p-6 rounded-3xl border border-white/10 shadow-2xl backdrop-blur-md"
+      >
         <div>
           <h2 className="text-3xl font-black tracking-tight">Today's Focus</h2>
           <p className="text-gray-400">Manage your learning tasks for today</p>
@@ -84,22 +89,30 @@ export default function KanbanBoard() {
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
             placeholder="What's next?"
-            className="bg-white/10 border border-white/20 rounded-2xl px-6 py-3 outline-none focus:border-indigo-500 min-w-[300px]"
+            className="bg-white/10 border border-white/20 rounded-2xl px-6 py-3 outline-none focus:border-indigo-500 min-w-[300px] transition-all"
             onKeyPress={(e) => e.key === 'Enter' && addTask()}
           />
-          <button 
+          <motion.button 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={addTask}
             className="bg-indigo-600 p-4 rounded-2xl hover:bg-indigo-500 transition-colors shadow-lg"
           >
             <Plus />
-          </button>
+          </motion.button>
         </div>
-      </header>
+      </motion.header>
 
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 flex-1">
-          {Object.values(columns).map((column) => (
-            <div key={column.id} className="flex flex-col bg-white/5 rounded-3xl border border-white/10 overflow-hidden">
+          {Object.values(columns).map((column, colIdx) => (
+            <motion.div 
+              key={column.id}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: colIdx * 0.1 }}
+              className="flex flex-col bg-white/5 rounded-3xl border border-white/10 overflow-hidden backdrop-blur-sm"
+            >
                 <div className="p-5 border-b border-white/10 flex items-center justify-between bg-white/[0.02]">
                     <div className="flex items-center gap-3">
                         {column.icon}
@@ -115,33 +128,40 @@ export default function KanbanBoard() {
                             ref={provided.innerRef}
                             className={`flex-1 p-4 transition-colors gap-4 flex flex-col min-h-[400px] ${snapshot.isDraggingOver ? 'bg-white/5' : ''}`}
                         >
-                            {column.items.map((item, index) => (
-                                <Draggable key={item.id} draggableId={item.id} index={index}>
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            className={`bg-gray-800 p-6 rounded-2xl border border-white/10 shadow-xl transition-all ${
-                                                snapshot.isDragging ? 'rotate-3 scale-105 border-indigo-500 z-50' : 'hover:border-white/20'
-                                            }`}
-                                        >
-                                            <div className="flex gap-4">
-                                                <GripVertical className="text-gray-600 mt-1 shrink-0" size={20} />
-                                                <p className="text-lg leading-snug">{item.content}</p>
-                                            </div>
-                                        </div>
-                                    )}
-                                </Draggable>
-                            ))}
+                            <AnimatePresence>
+                                {column.items.map((item, index) => (
+                                    <Draggable key={item.id} draggableId={item.id} index={index}>
+                                        {(provided, snapshot) => (
+                                            <motion.div
+                                                layout
+                                                initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                                exit={{ opacity: 0, scale: 0.8 }}
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                                className={`bg-gray-800 p-6 rounded-2xl border border-white/10 shadow-xl transition-all ${
+                                                    snapshot.isDragging ? 'rotate-3 scale-105 border-indigo-500 z-50' : 'hover:border-white/20'
+                                                }`}
+                                            >
+                                                <div className="flex gap-4">
+                                                    <GripVertical className="text-gray-600 mt-1 shrink-0" size={20} />
+                                                    <p className="text-lg leading-snug">{item.content}</p>
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </Draggable>
+                                ))}
+                            </AnimatePresence>
                             {provided.placeholder}
                         </div>
                     )}
                 </Droppable>
-            </div>
+            </motion.div>
           ))}
         </div>
       </DragDropContext>
     </div>
   );
 }
+

@@ -1,0 +1,1146 @@
+# 📋 Complete Micro-Task List — Every Single Step
+
+> Every small task, every file to create, every card to build, every button to add.
+> Check them off as you go. Nothing is skipped.
+
+---
+
+## 📅 DAY 1 — Project Skeleton + Backend
+
+### 1.1 Create Project Folders
+- [ ] Create root folder `my-edtech-app/`
+- [ ] Create subfolder `my-edtech-app/backend/`
+- [ ] Create subfolder `my-edtech-app/frontend/` (will be auto-created by Vite)
+
+### 1.2 Frontend — Initialize Vite + React
+- [ ] Run `npm create vite@latest frontend -- --template react`
+- [ ] `cd frontend`
+- [ ] Run `npm install`
+- [ ] Delete the default `App.css` file (we will use Tailwind instead)
+- [ ] Delete the default `src/assets/react.svg` (replace with your own logo later)
+- [ ] Clear out the default code inside `App.jsx` (remove the counter example)
+- [ ] Clear out the default code inside `index.css` (remove Vite default styles)
+
+### 1.3 Frontend — Install Tailwind CSS
+- [ ] Run `npm install -D tailwindcss@3 postcss autoprefixer`
+- [ ] Run `npx tailwindcss init -p` (this creates `tailwind.config.js` and `postcss.config.js`)
+- [ ] Open `tailwind.config.js` → set `content` to `["./index.html", "./src/**/*.{js,jsx}"]`
+- [ ] Open `src/index.css` → add these 3 lines at the top:
+  ```
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+  ```
+- [ ] Test Tailwind works: add `<h1 className="text-3xl text-red-500">Hello</h1>` in App.jsx
+- [ ] Run `npm run dev` → confirm red "Hello" text shows at `localhost:5173`
+
+### 1.4 Frontend — Install ALL Dependencies (One Command)
+- [ ] Run this single command:
+  ```
+  npm install react-router-dom axios framer-motion recharts lucide-react @heroicons/react react-icons react-toastify react-big-calendar date-fns @hello-pangea/dnd react-hotkeys-hook react-speech-recognition regenerator-runtime pdfjs-dist react-pdf react-player react-syntax-highlighter chart.js --legacy-peer-deps
+  ```
+- [ ] Confirm no fatal errors (warnings are OK)
+
+### 1.5 Frontend — Create Folder Structure
+- [ ] Create folder `src/components/`
+- [ ] Create folder `src/assets/`
+- [ ] Create folder `src/page/`
+- [ ] Create folder `src/page/Alluser/`
+- [ ] Create folder `src/page/Deaf/`
+- [ ] Create folder `src/page/Deaf/components/`
+- [ ] Create folder `src/page/Deaf/pages/`
+- [ ] Create folder `src/page/Deaf/assets/`
+- [ ] Create folder `src/page/Blind/`
+- [ ] Create folder `src/page/Blind/components/`
+- [ ] Create folder `src/page/Blind/pages/`
+
+### 1.6 Frontend — Create ALL Empty Placeholder Files
+Each file should just export a simple `<div>Page Name</div>` for now:
+
+- [ ] Create `src/page/Home.jsx` → return `<div>Home Page</div>`
+- [ ] Create `src/page/Alluser/Home1.jsx` → return `<div>Universal Access</div>`
+- [ ] Create `src/components/Navbar.jsx` → return `<div>Navbar</div>`
+- [ ] Create `src/page/Deaf/Deaf.jsx` → return `<div>Deaf Dashboard</div>`
+- [ ] Create `src/page/Deaf/components/Auth.jsx` → return `<div>Deaf Auth</div>`
+- [ ] Create `src/page/Deaf/components/Sidebar.jsx` → return `<div>Sidebar</div>`
+- [ ] Create `src/page/Deaf/components/Navbar.jsx` → return `<div>Deaf Navbar</div>`
+- [ ] Create `src/page/Deaf/components/SignLanguageDictionary.jsx` → return `<div>Dictionary</div>`
+- [ ] Create `src/page/Deaf/components/SignLanguageTranslator.jsx` → return `<div>Translator</div>`
+- [ ] Create `src/page/Deaf/components/SignLanguageVideo.jsx` → return `<div>Sign Video</div>`
+- [ ] Create `src/page/Deaf/components/Fingerspell.jsx` → return `<div>Fingerspell</div>`
+- [ ] Create `src/page/Deaf/components/KanbanBoard.jsx` → return `<div>Kanban</div>`
+- [ ] Create `src/page/Deaf/components/PuzzleGame.jsx` → return `<div>Puzzle</div>`
+- [ ] Create `src/page/Deaf/components/SentanceGames.jsx` → return `<div>Sentence Games</div>`
+- [ ] Create `src/page/Deaf/components/InteractiveQuiz.jsx` → return `<div>Quiz</div>`
+- [ ] Create `src/page/Deaf/components/ProgressChart.jsx` → return `<div>Chart</div>`
+- [ ] Create `src/page/Deaf/components/Signgame.jsx` → return `<div>Sign Game</div>`
+- [ ] Create `src/page/Deaf/components/DProfile.jsx` → return `<div>Profile</div>`
+- [ ] Create `src/page/Deaf/components/Badges.jsx` → return `<div>Badges</div>`
+- [ ] Create `src/page/Deaf/components/Leaderboard.jsx` → return `<div>Leaderboard</div>`
+- [ ] Create `src/page/Deaf/components/Forum.jsx` → return `<div>Forum</div>`
+- [ ] Create `src/page/Deaf/components/Calender.jsx` → return `<div>Calendar</div>`
+- [ ] Create `src/page/Deaf/components/LiveChat.jsx` → return `<div>Live Chat</div>`
+- [ ] Create `src/page/Deaf/components/Poll.jsx` → return `<div>Poll</div>`
+- [ ] Create `src/page/Deaf/components/PremiumBanner.jsx` → return `<div>Premium</div>`
+- [ ] Create `src/page/Deaf/components/ProgressTracker.jsx` → return `<div>Tracker</div>`
+- [ ] Create `src/page/Deaf/components/VideoLesson.jsx` → return `<div>Video Lesson</div>`
+- [ ] Create `src/page/Deaf/components/VideoPlayer.jsx` → return `<div>Video Player</div>`
+- [ ] Create `src/page/Deaf/components/VisualAid.jsx` → return `<div>Visual Aid</div>`
+- [ ] Create `src/page/Deaf/components/VisualFeedback.jsx` → return `<div>Visual Feedback</div>`
+- [ ] Create `src/page/Deaf/components/VisualNotification.jsx` → return `<div>Notification</div>`
+- [ ] Create `src/page/Deaf/components/VibrationAlert.jsx` → return `<div>Vibration</div>`
+- [ ] Create `src/page/Deaf/components/SignLangDetection.jsx` → return `<div>Detection</div>`
+- [ ] Create `src/page/Deaf/pages/Dashboard.jsx` → return `<div>Dashboard Page</div>`
+- [ ] Create `src/page/Deaf/pages/SignLanguage.jsx` → return `<div>Sign Language Page</div>`
+- [ ] Create `src/page/Deaf/pages/VisualLearning.jsx` → return `<div>Visual Learning Page</div>`
+- [ ] Create `src/page/Deaf/pages/Gamification.jsx` → return `<div>Gamification Page</div>`
+- [ ] Create `src/page/Deaf/pages/Community.jsx` → return `<div>Community Page</div>`
+- [ ] Create `src/page/Deaf/pages/Accessibility.jsx` → return `<div>Accessibility Page</div>`
+- [ ] Create `src/page/Deaf/pages/Canvas.jsx` → return `<div>Canvas Page</div>`
+- [ ] Create `src/page/Deaf/pages/Meet.jsx` → return `<div>Meet Page</div>`
+- [ ] Create `src/page/Deaf/pages/PlanYourDay.jsx` → return `<div>Plan Your Day</div>`
+- [ ] Create `src/page/Blind/Blind.jsx` → return `<div>Blind Landing</div>`
+- [ ] Create `src/page/Blind/components/AuthBlind.jsx` → return `<div>Blind Auth</div>`
+- [ ] Create `src/page/Blind/components/Aitutor.jsx` → return `<div>AI Tutor</div>`
+- [ ] Create `src/page/Blind/components/Videos.jsx` → return `<div>Videos</div>`
+- [ ] Create `src/page/Blind/components/PDFReader.jsx` → return `<div>PDF Reader</div>`
+- [ ] Create `src/page/Blind/components/Game1.jsx` → return `<div>Geography Quiz</div>`
+- [ ] Create `src/page/Blind/components/YoutubeSummary.jsx` → return `<div>YouTube Summary</div>`
+- [ ] Create `src/page/Blind/components/DevTools.jsx` → return `<div>Dev Tools</div>`
+- [ ] Create `src/page/Blind/components/Navbar.jsx` → return `<div>Blind Navbar</div>`
+- [ ] Create `src/page/Blind/components/Sidebar.jsx` → return `<div>Blind Sidebar</div>`
+- [ ] Create `src/page/Blind/pages/Blind.jsx` → return `<div>Voice Hub</div>`
+- [ ] Create `src/page/Blind/pages/SubtitleGenerator.jsx` → return `<div>Subtitle Generator</div>`
+- [ ] Create `src/page/Blind/pages/CodeViewer.jsx` → return `<div>Code Viewer</div>`
+
+### 1.7 Frontend — Set Up App.jsx with All Routes
+- [ ] Open `src/App.jsx`
+- [ ] Import `BrowserRouter`, `Routes`, `Route` from `react-router-dom`
+- [ ] Import every single page/component file you just created (28 imports)
+- [ ] Add `<Router>` wrapper
+- [ ] Add `<Routes>` inside
+- [ ] Add route: `path="/"` → `<Home />`
+- [ ] Add route: `path="/home"` → `<Home />`
+- [ ] Add route: `path="/deaf"` → `<Deaf />`
+- [ ] Add route: `path="/allusers"` → `<Home1 />`
+- [ ] Add route: `path="/authdeaf"` → `<SignAuth />`
+- [ ] Add route: `path="/signlang"` → `<SignLanguage />`
+- [ ] Add route: `path="/visual-learning"` → `<VisualLearning />`
+- [ ] Add route: `path="/gamification-deaf"` → `<Gamification />`
+- [ ] Add route: `path="/community-deaf"` → `<Community />`
+- [ ] Add route: `path="/accessibility"` → `<Accessibility />`
+- [ ] Add route: `path="/dprofile"` → `<DProfile />`
+- [ ] Add route: `path="/canvas"` → `<Canvas />`
+- [ ] Add route: `path="/signgame"` → `<Signgame />`
+- [ ] Add route: `path="/deaf-meet"` → `<Meet />`
+- [ ] Add route: `path="/deaf-planyourday"` → `<PlanYourDay />`
+- [ ] Add route: `path="/authblind"` → `<AuthBlind />`
+- [ ] Add route: `path="/mainblind"` → `<Blind />`
+- [ ] Add route: `path="/blindvideos"` → `<Videos />`
+- [ ] Add route: `path="/blindsubtitle"` → `<SubtitleGenerator />`
+- [ ] Add route: `path="/blindcode"` → `<CodeViewer />`
+- [ ] Add route: `path="/blinddev"` → `<DevTools />`
+- [ ] Add route: `path="/aitutor"` → `<Aitutor />`
+- [ ] Add route: `path="/blindnavbar"` → `<BlindNavbar />`
+- [ ] Add route: `path="/game1"` → `<Game1 />`
+- [ ] Add route: `path="/game2"` → `<SentanceGames />`
+- [ ] Add route: `path="/youtubesummary"` → `<YoutubeSummary />`
+- [ ] Test: navigate to `localhost:5173/deaf` → should show "Deaf Dashboard"
+- [ ] Test: navigate to `localhost:5173/authblind` → should show "Blind Auth"
+
+### 1.8 Frontend — Add Assets
+- [ ] Find or create a logo image (PNG, ~200x200)
+- [ ] Save as `src/assets/logo.png`
+- [ ] Find 5-6 images for landing page (accessibility-themed stock photos)
+- [ ] Save to `src/page/Deaf/assets/`:
+  - `blind.jpg` (person with accessibility needs)
+  - `deaf.jpg` (person using sign language)
+  - `wheel.jpg` (wheelchair user or general accessibility)
+  - `blindboy.jpg` (another accessibility photo)
+  - `alarmy.jpg` (person in educational setting)
+- [ ] Save sign language reference image as `src/page/Deaf/assets/atozsignlang.jpg`
+- [ ] Save game assets: `coin.png`, `Medal Blue.png`, `target1.jpg`, `target2.png`, `target3.png`
+- [ ] Save canvas intro image: `canvasintro.png`
+- [ ] Save hand scan image: `handscan.jpg`
+
+### 1.9 Frontend — Create `.env` File
+- [ ] Create file `frontend/.env`
+- [ ] Add line: `VITE_API_URL=http://localhost:5050/api`
+- [ ] Add line: `VITE_GEMINI_API_KEY=` (leave blank for now)
+- [ ] Add line: `VITE_YOUTUBE_API_KEY=` (leave blank for now)
+- [ ] Add line: `VITE_GIPHY_API_KEY=` (leave blank for now)
+- [ ] Create `frontend/.env.example` with same variables but empty values
+
+### 1.10 Backend — Initialize
+- [ ] `cd backend`
+- [ ] Run `npm init -y`
+- [ ] Open `package.json` → change `"name"` to `"shikshasoladu-backend"`
+- [ ] Add `"description"` field
+- [ ] Change `"main"` to `"server.js"`
+- [ ] Add `"scripts"`:
+  - `"start": "node server.js"`
+  - `"dev": "node --watch server.js"`
+- [ ] Run `npm install express cors dotenv mongoose`
+
+### 1.11 Backend — Create `.env` File
+- [ ] Create file `backend/.env`
+- [ ] Add line: `PORT=5050`
+- [ ] Add line: `MONGO_URI=` (leave blank — demo mode)
+- [ ] Create `backend/.env.example` with same variables
+
+### 1.12 Backend — Build `server.js` (The Entire Backend in 1 File)
+
+#### Step 1: Basic Setup
+- [ ] Add `require('express')`, `require('mongoose')`, `require('cors')`, `require('dotenv')`
+- [ ] Call `dotenv.config()`
+- [ ] Create Express app: `const app = express()`
+- [ ] Set PORT: `const PORT = process.env.PORT || 5050`
+- [ ] Add `app.use(cors())`
+- [ ] Add `app.use(express.json())`
+
+#### Step 2: Optional MongoDB Connection
+- [ ] Add `let dbConnected = false`
+- [ ] Add `if (process.env.MONGO_URI)` block → `mongoose.connect()` 
+- [ ] Add `.then()` → set `dbConnected = true`, log success
+- [ ] Add `.catch()` → log warning, continue with in-memory
+- [ ] Add `else` block → log "using in-memory store"
+
+#### Step 3: In-Memory Database — Users
+- [ ] Create `const db = {}` object
+- [ ] Add `db.users` array with 3 demo users:
+  - User 1: id `u1`, name `Aditya`, email, role `deaf`, points `3845`, level `7`, streak `32`
+  - User 2: id `u2`, name `Priya`, email, role `blind`, points `4210`, level `8`, streak `45`
+  - User 3: id `u3`, name `Rahul`, email, role `deaf`, points `2950`, level `6`, streak `18`
+
+#### Step 4: In-Memory Database — Lessons
+- [ ] Add `db.lessons` array with 5 lessons:
+  - Lesson 1: Sign Language Basics (beginner, 15min, 50pts)
+  - Lesson 2: Advanced Signing Practice (advanced, 45min, 120pts)
+  - Lesson 3: Audio Storytelling 101 (beginner, 20min, 60pts)
+  - Lesson 4: STEM Vocabulary in Sign Language (intermediate, 60min, 150pts)
+  - Lesson 5: Braille Reading Fundamentals (beginner, 25min, 80pts)
+
+#### Step 5: In-Memory Database — Progress
+- [ ] Add `db.progress` object:
+  - `u1`: completedLessons `["l1"]`, currentLesson `"l2"`, weeklyMinutes `275`
+  - `u2`: completedLessons `["l3", "l5"]`, currentLesson `"l4"`, weeklyMinutes `310`
+  - `u3`: completedLessons `["l1"]`, currentLesson `"l2"`, weeklyMinutes `120`
+
+#### Step 6: In-Memory Database — Posts
+- [ ] Add `db.posts` array with 3 forum posts:
+  - Post 1: by u1, "Tips for practicing signing daily"
+  - Post 2: by u2, "Best audio textbooks for physics?"
+  - Post 3: by u3, "Anyone interested in a weekly signing meetup?"
+
+#### Step 7: In-Memory Database — Badges
+- [ ] Add `db.badges` array with 3 badges:
+  - Badge 1: "Signing Scholar" — award icon
+  - Badge 2: "Perfect Streak" — star icon
+  - Badge 3: "Community Guide" — users icon
+
+#### Step 8: Auto-Increment Counters
+- [ ] Add `let nextPostId = db.posts.length + 1`
+- [ ] Add `let nextUserId = db.users.length + 1`
+
+#### Step 9: Routes — Root + API Index
+- [ ] `GET /` → return JSON: name, version, docs link, database status
+- [ ] `GET /api` → return JSON: object listing all available endpoints
+
+#### Step 10: Routes — Health
+- [ ] `GET /api/health` → return `{ status: "ok", uptime, database }`
+
+#### Step 11: Routes — Auth (Mock)
+- [ ] `POST /api/auth/login` → extract `email` from body → find user by email or fallback to first user → return `{ token, user }`
+- [ ] `POST /api/auth/register` → extract `name, email, role` → validate required → check duplicate email → create new user → add to `db.users` → init progress → return `{ token, user }`
+
+#### Step 12: Routes — Users
+- [ ] `GET /api/users` → return `db.users`
+- [ ] `GET /api/users/:id` → find by id → 404 if not found → return user
+
+#### Step 13: Routes — Lessons
+- [ ] `GET /api/lessons` → filter by `category` and `level` query params → return filtered list
+- [ ] `GET /api/lessons/:id` → find by id → 404 if not found → return lesson
+
+#### Step 14: Routes — Progress
+- [ ] `GET /api/progress/:userId` → lookup in `db.progress` → 404 if not found → return
+- [ ] `POST /api/progress/:userId/complete` → extract `lessonId` → validate user + lesson exist → add lesson to completedLessons (if not already) → add points to user → add minutes → return `{ user, progress }`
+
+#### Step 15: Routes — Community
+- [ ] `GET /api/community/posts` → sort by `createdAt` descending → return
+- [ ] `POST /api/community/posts` → extract `userId, title, body` → validate all required → find author → create post object → add to `db.posts` → return 201
+
+#### Step 16: Routes — Leaderboard + Badges
+- [ ] `GET /api/leaderboard` → sort users by `points` descending → take top 10 → return
+- [ ] `GET /api/badges` → return `db.badges`
+
+#### Step 17: Routes — 404 Catch-All
+- [ ] `app.use()` → return 404 JSON with method + path
+
+#### Step 18: Start Server
+- [ ] `app.listen(PORT, () => console.log(...))`
+
+### 1.13 Backend — Test Every Endpoint
+- [ ] Start server: `npm start`
+- [ ] Open browser → `http://localhost:5050` → see API info JSON
+- [ ] Visit `http://localhost:5050/api` → see endpoint list
+- [ ] Visit `http://localhost:5050/api/health` → see health status
+- [ ] Visit `http://localhost:5050/api/users` → see 3 users
+- [ ] Visit `http://localhost:5050/api/users/u1` → see Aditya
+- [ ] Visit `http://localhost:5050/api/lessons` → see 5 lessons
+- [ ] Visit `http://localhost:5050/api/lessons?category=sign-language` → see filtered
+- [ ] Visit `http://localhost:5050/api/progress/u1` → see u1 progress
+- [ ] Visit `http://localhost:5050/api/community/posts` → see 3 posts
+- [ ] Visit `http://localhost:5050/api/leaderboard` → see sorted users
+- [ ] Visit `http://localhost:5050/api/badges` → see 3 badges
+
+---
+
+## 📅 DAY 2 — Landing Page + Auth Pages
+
+### 2.1 Landing Page — Navbar Section (`Home.jsx`)
+- [ ] Import `motion` from `framer-motion`
+- [ ] Import `Link` from `react-router-dom`
+- [ ] Import `Globe`, `Book` icons from `lucide-react`
+- [ ] Import `logo.png` from assets
+- [ ] Create a `<nav>` bar with `motion.nav`
+- [ ] Add entry animation: `initial={{ y: -100 }}` → `animate={{ y: 0 }}`
+- [ ] Set background: `bg-indigo-700`, fixed at top, `z-10`
+- [ ] Add logo on the left: yellow "Shiksha" + white "Soladu.ai"
+- [ ] Add nav links: Home (with Globe icon), About Us (with Book icon)
+- [ ] Add "Sign In" button: `bg-yellow-400 text-indigo-800 rounded-md`
+- [ ] Add mobile hamburger button (hamburger SVG icon, hidden on `md:` screens)
+
+### 2.2 Landing Page — Hero Section (Left Side)
+- [ ] Create a two-column flex layout: `<div className="flex pt-24">`
+- [ ] Left column: `w-1/2 pr-8`
+- [ ] Add decorative orange circle: `w-16 h-16 bg-orange-500 rounded-full`
+- [ ] Animate circle: `initial={{ scale: 0 }}` → `animate={{ scale: 1 }}`
+- [ ] Add `<h1>` heading: "Inclusive Learning for Everyone."
+- [ ] Style heading: `text-5xl font-bold leading-tight mb-6`
+- [ ] Animate heading: fade up with delay `0.3`
+- [ ] Add `<p>` subtitle paragraph
+- [ ] Animate subtitle: fade up with delay `0.5`
+- [ ] Add "Need Help?" button: `bg-blue-500 text-white rounded-full` with arrow icon SVG
+- [ ] Add hover animation: `whileHover={{ scale: 1.05 }}` + `whileTap={{ scale: 0.95 }}`
+- [ ] Add "Search" button: `bg-yellow-400 text-black rounded-full` with search icon SVG
+- [ ] Add hover animation to Search button too
+
+### 2.3 Landing Page — Hero Section (Right Side — Floating Images)
+- [ ] Right column: `w-1/2 relative`
+- [ ] Create 6 floating image containers, each one:
+  - Wrap in `<motion.div>` with infinite floating animation
+  - Set `rounded-tl-full rounded-tr-full rounded-br-full` (bubble shape)
+  - Give each different position (`absolute top-0 left-0`, etc.)
+  - Give each different size (`w-40 h-40`, `w-32 h-32`, etc.)
+  - Put an `<img>` inside each
+  - Give each different float animation (`y: [0, -15, 0]` with different durations)
+- [ ] Floating image 1: `blind.jpg`, top-left, float up-down 3s
+- [ ] Floating image 2: `blind.jpg`, top-right, float up-down 4s
+- [ ] Floating image 3: `deaf.jpg`, middle-left, float left-right 5s
+- [ ] Floating image 4: `blindboy.jpg`, middle-right, scale pulse 4s
+- [ ] Floating image 5: `wheel.jpg`, bottom-left, float up-down 5s
+- [ ] Floating image 6: `alarmy.jpg` (circular), bottom-right, float up-down 4s
+- [ ] Add decorative rotating blue square: `w-10 h-10 bg-blue-200 rounded-sm`
+- [ ] Add decorative pulsing yellow dot: `w-6 h-6 bg-yellow-400 rounded-full`
+
+### 2.4 Landing Page — Three Pathway Cards
+- [ ] Create section: `max-w-5xl mx-auto mt-16`
+- [ ] Create 3-column grid: `grid grid-cols-1 md:grid-cols-3 gap-8`
+- [ ] **Deaf Community Card:**
+  - [ ] White card with shadow: `bg-white rounded-xl shadow-lg hover:shadow-xl`
+  - [ ] Indigo top bar: `bg-indigo-600 h-2 w-full`
+  - [ ] Icon circle: `bg-indigo-100 rounded-full w-16 h-16` with `<Ear>` icon
+  - [ ] Heading: "Deaf Community" in `text-indigo-800`
+  - [ ] Description paragraph
+  - [ ] 3 feature bullet points, each with green circle icon + text:
+    - "Sign language video lessons" (Video icon)
+    - "Interactive signing practice" (HandMetal icon)
+    - "Deaf community support" (Users icon)
+  - [ ] CTA button: "Explore Deaf Learning" → links to `/authdeaf`
+  - [ ] Button: `bg-indigo-600 text-white rounded-lg` with arrow icon
+  - [ ] Arrow moves right on hover: `group-hover:translate-x-1`
+- [ ] **Blind Community Card:**
+  - [ ] Same structure as Deaf card
+  - [ ] Purple color theme: `bg-purple-600`, `text-purple-800`, etc.
+  - [ ] `<Eye>` icon
+  - [ ] 3 features: Audio textbooks, Screen reader optimized, Audio-based assessments
+  - [ ] CTA links to `/authblind`
+- [ ] **Universal Access Card:**
+  - [ ] Same structure
+  - [ ] Teal color theme: `bg-teal-600`, `text-teal-800`, etc.
+  - [ ] `<Users>` icon
+  - [ ] 3 features: Adaptive learning paths, Multi-format content, Collaborative activities
+  - [ ] CTA links to `/allusers`
+
+### 2.5 Landing Page — "Find Your Mentor" Section
+- [ ] Create section: `bg-gray-50 rounded-xl p-8 mt-16`
+- [ ] Animate entrance: `initial={{ y: 50, opacity: 0 }}` → `animate={{ y: 0, opacity: 1 }}`
+- [ ] Add heading: "Find Your Right Mentor"
+- [ ] Add subtitle: "Stay connected with a monthly or yearly subscription."
+- [ ] Create 2-column layout: left 1/3, right 2/3
+- [ ] **Left column — mentor card:**
+  - [ ] White card with floating badge: "Available Solutions" (gear icon)
+  - [ ] Second badge: "Easy Methods" with description
+  - [ ] Person image (`blindboy.jpg`) with floating animation
+  - [ ] Mentor info card at bottom: initials circle, name "Perry Snow", role "UX Trainer"
+  - [ ] Blue phone call button with hover scale
+- [ ] **Right column — 2 info boxes:**
+  - [ ] Box 1: yellow icon bg + "Ring or message your mentor anytime" heading + description
+  - [ ] Add gentle floating animation: `x: [0, 5, 0]` over 6s
+  - [ ] Box 2: yellow icon bg + "Become a mentor and help out people" heading + description
+  - [ ] Add gentle floating animation: `x: [0, -5, 0]` over 5s
+
+### 2.6 Landing Page — Voice Command (Optional Feature)
+- [ ] Add state: `const [voiceEnabled, setVoiceEnabled] = useState(false)`
+- [ ] Add `useEffect` that only runs when `voiceEnabled` is true
+- [ ] Inside: create `SpeechRecognition` instance
+- [ ] Listen for "blind" → navigate to `/authblind`
+- [ ] Listen for "deaf" → navigate to `/authdeaf`
+- [ ] Add cleanup: stop recognition on unmount
+
+### 2.7 Deaf Auth Page — Hand Sign Authentication (`Deaf/components/Auth.jsx`)
+- [ ] Import `Hands`, `HAND_CONNECTIONS` from `@mediapipe/hands`
+- [ ] Import `Camera` from `@mediapipe/camera_utils`
+- [ ] Import `useNavigate` from `react-router-dom`
+- [ ] Import `toast`, `ToastContainer` from `react-toastify`
+- [ ] Import `react-toastify/dist/ReactToastify.css`
+- [ ] Create refs: `videoRef`, `canvasRef`
+- [ ] Create states: `detectedSequence`, `isAuthenticating`, `handDetected`, `letterRecognized`, `progressPercentage`
+- [ ] Set predefined password: `"AB"`
+- [ ] **useEffect — MediaPipe Hands setup:**
+  - [ ] Create `new Hands()` with CDN locate
+  - [ ] Set options: maxNumHands 1, modelComplexity 1, confidence 0.5
+  - [ ] Define `onResults` callback:
+    - [ ] Clear canvas
+    - [ ] Check if hand detected → update state
+    - [ ] Draw landmarks on canvas
+    - [ ] Detect letter from landmarks
+    - [ ] Append letter to sequence
+    - [ ] Update progress percentage
+  - [ ] Create `new Camera()` from video ref
+  - [ ] Start camera
+  - [ ] Cleanup: stop camera on unmount
+- [ ] **drawLandmarks function:**
+  - [ ] Loop through landmarks → draw blue circles (radius 4)
+  - [ ] Loop through HAND_CONNECTIONS → draw gradient lines between connected points
+- [ ] **detectSignLanguageLetter function:**
+  - [ ] Get thumb tip (landmark 4), index tip (8), middle tip (12)
+  - [ ] If thumb above index AND thumb above middle → return "A"
+  - [ ] If thumb below index AND index above middle → return "B"
+  - [ ] Otherwise → return ""
+- [ ] **useEffect — Auth check:**
+  - [ ] If sequence ends with password → show success toast → navigate to `/deaf` after 2s
+- [ ] **UI — Container:**
+  - [ ] Full screen centered: `min-h-screen bg-white flex items-center justify-center`
+  - [ ] Card: `max-w-md bg-white rounded-2xl shadow-lg p-8`
+- [ ] **UI — Header:**
+  - [ ] `<h2>` "Hand Sign Authentication" — `text-3xl font-bold`
+  - [ ] `<p>` subtitle — `text-gray-500`
+- [ ] **UI — Video area:**
+  - [ ] `<video>` element with ref, autoPlay, playsInline
+  - [ ] `<canvas>` overlay on top (absolute positioned)
+  - [ ] Status badge (top-right): green "Hand Detected" or gray "No Hand"
+  - [ ] Current letter display (bottom-left): letter in blue circle
+- [ ] **UI — Progress bar:**
+  - [ ] Gray track: `bg-gray-100 rounded-full h-2`
+  - [ ] Blue fill: `bg-blue-600 h-2 rounded-full` with dynamic width
+- [ ] **UI — Detected sequence display:**
+  - [ ] Label: "Detected Sequence:"
+  - [ ] Letter chips: each letter in `bg-blue-100 text-blue-800 rounded-lg w-8 h-8`
+- [ ] **UI — Helper text:**
+  - [ ] "Position your hand clearly in the frame"
+- [ ] Add `<ToastContainer />` at bottom
+
+### 2.8 Blind Auth Page — Voice Authentication (`Blind/components/AuthBlind.jsx`)
+- [ ] Import `SpeechRecognition`, `useSpeechRecognition` from `react-speech-recognition`
+- [ ] Import `useNavigate`
+- [ ] Create states: `secretWord`, `isAuthenticated`, `feedback`, `attemptCount`
+- [ ] Create ref: `audioRef`
+- [ ] Set secret word constant: `"open"`
+- [ ] **speak function:** create `SpeechSynthesisUtterance` → `speechSynthesis.speak()`
+- [ ] **playAudio function:** Web Audio API beep generator (sine wave, different frequency for success vs listening)
+- [ ] **useEffect — transcript watcher:**
+  - [ ] If transcript includes "open" → set authenticated → play success beep → speak "Authentication successful" → navigate to `/mainblind` after 2.5s
+  - [ ] If transcript length > 10 but no match → increment attempts → set feedback
+  - [ ] After 3 attempts → show hint: "rhymes with hope"
+- [ ] **useEffect — auto-start listening on mount:**
+  - [ ] If browser supports → `SpeechRecognition.startListening({ continuous: true })`
+  - [ ] Play listening beep
+  - [ ] Speak welcome message
+  - [ ] Cleanup: stop listening + cancel speech on unmount
+- [ ] **useEffect — keyboard handler:**
+  - [ ] Space bar toggles listening on/off
+  - [ ] Speak status change
+- [ ] **UI — Fallback (no speech support):**
+  - [ ] Text input for secret word
+  - [ ] Submit button
+  - [ ] Error feedback
+  - [ ] ARIA labels everywhere
+- [ ] **UI — Main view:**
+  - [ ] Full screen dark: `h-screen bg-gray-900 text-white`
+  - [ ] `<h1>` "Voice Authentication"
+  - [ ] Dark card: `bg-gray-800 p-8 rounded-xl shadow-lg max-w-md`
+  - [ ] Microphone circle: `w-24 h-24 rounded-full` — green + `animate-pulse` when listening, red when not
+  - [ ] Microphone SVG icon inside circle
+  - [ ] Instruction text: "Say the secret word to continue"
+  - [ ] Status text: "Listening..." or "Microphone inactive. Press space"
+  - [ ] Transcript display box: `bg-gray-700 rounded-lg` — "You said: (transcript)"
+  - [ ] Feedback box (if any): `bg-blue-900 rounded-lg`
+  - [ ] Pause/Resume button: `bg-blue-600 rounded-lg`
+  - [ ] Clear button: `bg-gray-600 rounded-lg`
+  - [ ] Helper text: "Press the space bar to toggle listening mode"
+  - [ ] Add `aria-live="polite"` on dynamic content
+  - [ ] Add `aria-label` on all buttons
+
+---
+
+## 📅 DAY 3 — Deaf Dashboard + Sidebar + Charts
+
+### 3.1 Sidebar Component (`Deaf/components/Sidebar.jsx`)
+- [ ] Import `Link` from `react-router-dom`
+- [ ] Import icons: `Home`, `BarChart2`, `Clipboard`, `Eye`, `Award`, `Users`, `Settings`, `UserCircle`, `ChevronDown`, `ChevronUp`, `ChevronLeft`, `ChevronRight`, `Calendar` from `lucide-react`
+- [ ] Import `logo.png`
+- [ ] Create state: `isGamificationOpen` (dropdown toggle)
+- [ ] Create state: `isSidebarOpen` (collapse toggle)
+- [ ] **Container:** `bg-indigo-700 h-full fixed top-0 left-0 z-50`
+- [ ] Dynamic width: `w-64` when open, `w-20` when collapsed
+- [ ] Add transition: `transition-all`
+- [ ] **Header:**
+  - [ ] Logo image: `h-8 w-8`
+  - [ ] Brand name: "ShikshaSoladu.ai" in yellow — hide when collapsed
+  - [ ] Collapse toggle button with ChevronLeft/ChevronRight icon
+- [ ] **Nav links — build each individually:**
+  - [ ] Link 1: Home icon + "Home" → `/deaf`
+  - [ ] Link 2: Clipboard icon + "Sign Language" → `/signlang`
+  - [ ] Link 3: Eye icon + "Visual Learning" → `/visual-learning`
+  - [ ] Link 4 (dropdown): Award icon + "Gamification" → toggle dropdown
+    - [ ] Add dropdown toggle with ChevronDown/ChevronUp
+    - [ ] Sub-link: "Canvas" → `/canvas`
+    - [ ] Sub-link: "Sign Game" → `/signgame`
+    - [ ] Sub-link: "More Games" → `/gamification-deaf`
+    - [ ] Sub-link: "Games" → `/game2`
+  - [ ] Link 5: Users icon + "Community" → `/community-deaf`
+  - [ ] Link 6: Users icon + "Meet with peers" → `/deaf-meet`
+  - [ ] Link 7: Calendar icon + "Plan Your Day" → `/deaf-planyourday`
+  - [ ] Link 8: UserCircle icon + "Profile" → `/dprofile`
+- [ ] All links: `text-white hover:text-yellow-300` with icon + text side-by-side
+- [ ] Hide text when sidebar collapsed: `{isSidebarOpen && <span>...</span>}`
+
+### 3.2 Deaf Navbar (`Deaf/components/Navbar.jsx`)
+- [ ] Create a top bar: `fixed top-0 left-64 right-0 h-14 bg-white shadow z-40`
+- [ ] Add search input on the left
+- [ ] Add notification bell icon
+- [ ] Add user avatar/initials on the right
+
+### 3.3 Deaf Dashboard Main (`Deaf/Deaf.jsx`)
+- [ ] Import `useState`, `useEffect`
+- [ ] Import Recharts: `BarChart`, `LineChart`, `Bar`, `Line`, `XAxis`, `YAxis`, `CartesianGrid`, `Tooltip`, `Legend`, `ResponsiveContainer`
+- [ ] Import icons: `Calendar`, `Award`, `Clock`, `Book`, `Video`, `MessageSquare`, `Star`, `Users`, `Zap`
+- [ ] Import `Sidebar` and `Navbar` components
+- [ ] **Live clock:**
+  - [ ] State: `currentTime` updated every 1 second via `setInterval`
+  - [ ] Format time: `toLocaleTimeString` with hour, minute, second, AM/PM
+  - [ ] Format date: `toLocaleDateString` with weekday, month, day, year
+  - [ ] Cleanup interval on unmount
+- [ ] **Chart sample data:**
+  - [ ] `weeklyProgressData`: 7 days × 3 metrics (signLanguage, visualLearning, reading)
+  - [ ] `monthlyProgressData`: 6 months × progress percentage
+  - [ ] `skillsData`: 5 skills × mastery percentage
+- [ ] **Dashboard tab state:** `activeTab` — "progress", "skills", "achievements"
+- [ ] **Layout:**
+  - [ ] Outer: `flex h-screen bg-gray-50`
+  - [ ] Left: `<Sidebar />`
+  - [ ] Right: `flex flex-col flex-1 overflow-hidden`
+  - [ ] Top: `<Navbar />`
+  - [ ] Content: `flex-1 overflow-y-auto p-6 ml-64 mt-14`
+- [ ] **Welcome section:**
+  - [ ] `<h1>` "Welcome back, Aditya!" — `text-4xl font-bold text-blue-600`
+  - [ ] Name in `text-indigo-700`
+- [ ] **Time/Date display card:**
+  - [ ] Gradient background: `bg-gradient-to-r from-indigo-500 to-purple-600`
+  - [ ] White text: time `text-5xl`, date `text-xl`
+  - [ ] Rounded corners + shadow
+- [ ] **Tab buttons:**
+  - [ ] 3 buttons in a row: "Learning Progress", "Sign Language Skills", "Achievements"
+  - [ ] Active tab: `text-indigo-700 border-b-2 border-indigo-700`
+  - [ ] Inactive: `text-gray-500 hover:text-indigo-600`
+
+### 3.4 Dashboard — "Progress" Tab Content
+- [ ] **Weekly Activity Bar Chart:**
+  - [ ] Section heading with Zap icon: "Weekly Learning Activity"
+  - [ ] White card: `bg-white p-6 rounded-xl shadow-md`
+  - [ ] `<ResponsiveContainer width="100%" height={300}>`
+  - [ ] `<BarChart>` with `weeklyProgressData`
+  - [ ] CartesianGrid with dashed lines
+  - [ ] XAxis: day names
+  - [ ] YAxis: "Minutes Spent" label
+  - [ ] Tooltip on hover
+  - [ ] Legend at bottom
+  - [ ] 3 colored bars: Sign Language (indigo), Visual Learning (amber), Reading (green)
+- [ ] **Monthly Progress Line Chart + Points Summary:**
+  - [ ] Two-column grid: `grid grid-cols-1 lg:grid-cols-3 gap-8`
+  - [ ] Left (2/3): Monthly Line Chart
+    - [ ] Heading with Book icon: "Monthly Progress"
+    - [ ] `<LineChart>` with `monthlyProgressData`
+    - [ ] Single line: "Learning Progress" in indigo, strokeWidth 2
+  - [ ] Right (1/3): Points Summary Card
+    - [ ] Heading with Award icon: "Points Summary"
+    - [ ] Total Points: "3,845" — `text-4xl font-bold text-indigo-700`
+    - [ ] Two sub-stats in columns: "This Week: 275" and "Daily Avg: 39"
+    - [ ] Level progress bar: "78%" with `bg-indigo-600` fill
+    - [ ] Text: "122 points until Level 8"
+- [ ] **Upcoming Lessons Table:**
+  - [ ] Heading with Calendar icon: "Upcoming Lessons"
+  - [ ] White card with table
+  - [ ] Table headers: Lesson, Type, Date, Duration, Points — `bg-indigo-50`
+  - [ ] Row 1: "Advanced Signing Practice" — Live Session badge (blue) — Today 4PM — 45min — 50pts
+  - [ ] Row 2: "Visual Storytelling" — On-demand badge (green) — Tomorrow — 30min — 35pts
+  - [ ] Row 3: "STEM Vocabulary" — Interactive badge (purple) — Mar 16 — 60min — 70pts
+  - [ ] Row hover: `hover:bg-indigo-50`
+
+### 3.5 Dashboard — "Skills" Tab Content
+- [ ] **Skill Mastery Horizontal Bar Chart:**
+  - [ ] Heading with Video icon: "Sign Language Proficiency"
+  - [ ] 2-column grid
+  - [ ] Left: `<BarChart layout="vertical">` with `skillsData`
+    - [ ] Horizontal bars showing mastery %
+    - [ ] YAxis: skill names
+    - [ ] XAxis: 0-100%
+  - [ ] Right: Vocabulary Progress card
+    - [ ] 4 progress items with labels and bars:
+      - "Common Phrases" — 156/200 (78%)
+      - "Academic Terms" — 94/150 (63%)
+      - "Professional Vocabulary" — 52/120 (43%)
+      - "Cultural References" — 78/100 (78%)
+    - [ ] Each: label + count on one line, progress bar below
+- [ ] **Recent Practice Sessions Table:**
+  - [ ] Heading with Clock icon
+  - [ ] Table headers: Date, Session Type, Duration, Accuracy, Review
+  - [ ] 3 rows with accuracy badges (green for 80%+, yellow for 70%+)
+  - [ ] "Review" link on each row
+
+### 3.6 Dashboard — "Achievements" Tab Content
+- [ ] **Achievements Grid:**
+  - [ ] Heading with Award icon: "Your Achievements"
+  - [ ] 3-column grid
+  - [ ] **3 earned badges** (full opacity):
+    - [ ] Badge 1: "Signing Scholar" — indigo left border — Award icon — indigo colors — earned date
+    - [ ] Badge 2: "Perfect Streak" — yellow left border — Star icon — yellow colors — earned date
+    - [ ] Badge 3: "Community Guide" — green left border — Users icon — green colors — earned date
+  - [ ] **3 in-progress badges** (50% opacity):
+    - [ ] "Video Master" — purple — 2/5 completed
+    - [ ] "Story Teller" — blue — 60% complete
+    - [ ] "Conversation Pro" — pink — 1/3 completed
+  - [ ] Each badge card:
+    - [ ] Left border color strip: `border-l-4 border-{color}`
+    - [ ] Icon circle: colored background + icon
+    - [ ] Title + description + status
+
+### 3.7 Profile Page (`Deaf/components/DProfile.jsx`)
+- [ ] Create layout with Sidebar
+- [ ] Add profile header section: avatar placeholder, name, email, role badge
+- [ ] Add stats grid: 3 cards — Total Points, Current Level, Day Streak
+- [ ] Add "Completed Lessons" list section
+- [ ] Add "Edit Profile" form: name input, email input, save button
+- [ ] Fetch user data from `/api/users/u1` on mount
+- [ ] Fetch progress from `/api/progress/u1` on mount
+
+---
+
+## 📅 DAY 4 — Sign Language Features + Games + Kanban
+
+### 4.1 Sign Language Page Shell (`Deaf/pages/SignLanguage.jsx`)
+- [ ] Import Sidebar
+- [ ] Create layout: sidebar + main content
+- [ ] Add tab navigation: "Dictionary", "Translator", "Fingerspelling"
+- [ ] Render the matching component based on active tab
+
+### 4.2 Sign Language Dictionary (`Deaf/components/SignLanguageDictionary.jsx`)
+- [ ] Add search input with placeholder "Search a sign..."
+- [ ] Add search button
+- [ ] Create state for search query and results
+- [ ] **API call function:**
+  - [ ] Check if `VITE_GIPHY_API_KEY` exists
+  - [ ] If yes: fetch from `api.giphy.com/v1/gifs/search?q=${query} sign language`
+  - [ ] If no: use hardcoded fallback array of demo results
+- [ ] Display results in a grid: `grid grid-cols-2 md:grid-cols-3 gap-4`
+- [ ] Each result card: GIF/image + word label below
+- [ ] Add loading spinner while fetching
+- [ ] Add "No results found" empty state
+
+### 4.3 Sign Language Translator (`Deaf/components/SignLanguageTranslator.jsx`)
+- [ ] Add text input / textarea: "Type a sentence to translate"
+- [ ] Add "Translate" button
+- [ ] Create a character-to-emoji/letter mapping object (A-Z → visual representation)
+- [ ] On translate: split sentence into characters
+- [ ] Display each character as a card/chip in a flex row
+- [ ] Add simple animation: characters appear one by one with delay
+- [ ] Add "Clear" button to reset
+
+### 4.4 Fingerspelling Challenge (`Deaf/components/Fingerspell.jsx`)
+- [ ] Create states: `difficulty`, `currentWord`, `userInput`, `score`, `timeLeft`, `isPlaying`, `round`
+- [ ] Create word lists per difficulty:
+  - Easy: 3-4 letter words
+  - Medium: 5-6 letter words
+  - Hard: 7+ letter words
+- [ ] **Difficulty selection screen:**
+  - [ ] 3 buttons: Easy, Medium, Hard
+  - [ ] Each with different color
+- [ ] **Game screen:**
+  - [ ] Timer display: countdown from 30/20/10 seconds
+  - [ ] Current word display (the word to spell)
+  - [ ] Show sign alphabet reference image
+  - [ ] Input area for user answer
+  - [ ] Submit button
+  - [ ] Score counter
+  - [ ] Round counter
+- [ ] **Timer logic:** `setInterval` counting down, clear on answer/timeout
+- [ ] **Scoring:** +10 correct, -5 wrong
+- [ ] **Game over screen:** show final score, option to play again
+
+### 4.5 Kanban Board (`Deaf/pages/PlanYourDay.jsx`)
+- [ ] Import `DragDropContext`, `Droppable`, `Draggable` from `@hello-pangea/dnd`
+- [ ] Import Sidebar
+- [ ] Create state: `columns` object with 3 columns:
+  - "To Do": array of task objects
+  - "In Progress": array of task objects  
+  - "Done": array of task objects
+- [ ] Seed with 3-5 demo tasks
+- [ ] **onDragEnd handler:**
+  - [ ] Get source and destination
+  - [ ] Remove from source column
+  - [ ] Insert into destination column at correct index
+  - [ ] Update state
+- [ ] **Add task feature:**
+  - [ ] Input field for new task title
+  - [ ] "Add" button → adds to "To Do" column
+- [ ] **UI — 3 column layout:**
+  - [ ] Each column: heading + colored header bar + task list
+  - [ ] "To Do" = red header, "In Progress" = yellow, "Done" = green
+  - [ ] `<Droppable>` wrapper per column
+  - [ ] Each task card: `<Draggable>` → white card with shadow, title text, delete button
+
+### 4.6 Puzzle Game (`Deaf/components/PuzzleGame.jsx`)
+- [ ] Create state: `grid`, `score`, `moves`, `isComplete`, `difficulty`
+- [ ] Generate shuffled grid (3x3, 4x4 depending on difficulty)
+- [ ] Fill with image pieces or word-pairs
+- [ ] **Game logic:** click two tiles to swap, check if matching
+- [ ] **UI:** grid of square tiles with click handlers
+- [ ] Score display + moves counter
+- [ ] Win screen with celebration
+
+### 4.7 Interactive Quiz (`Deaf/components/InteractiveQuiz.jsx`)
+- [ ] Create quiz data: 10 questions with 4 options each + correct answer
+- [ ] Create states: `currentQuestion`, `selectedAnswer`, `score`, `showResult`
+- [ ] Display question text
+- [ ] Display 4 option buttons
+- [ ] On select: highlight green (correct) or red (wrong)
+- [ ] "Next" button to advance
+- [ ] Progress bar showing question X of 10
+- [ ] Results screen at end: score + percentage
+
+### 4.8 Community Page (`Deaf/pages/Community.jsx`)
+- [ ] Import Sidebar, Forum, Leaderboard, Badges components
+- [ ] Create layout: sidebar + main content
+- [ ] **Forum section:**
+  - [ ] Fetch posts from `/api/community/posts`
+  - [ ] Display each post as a card: title, body, author name, date, reply count
+  - [ ] "Create Post" form: title input, body textarea, submit button
+  - [ ] On submit: POST to `/api/community/posts`
+- [ ] **Leaderboard section:**
+  - [ ] Fetch from `/api/leaderboard`
+  - [ ] Display ranked list: position badge + name + points
+  - [ ] Gold/silver/bronze colors for top 3
+- [ ] **Badges section:**
+  - [ ] Fetch from `/api/badges`
+  - [ ] Display badge cards with icon, name, description
+
+### 4.9 Sentence Games (`Deaf/components/SentanceGames.jsx`)
+- [ ] Create array of sentences to unscramble
+- [ ] Shuffle words in each sentence
+- [ ] Display shuffled words as clickable chips
+- [ ] User clicks words in correct order
+- [ ] "Selected words" area shows the sentence being built
+- [ ] Check answer button
+- [ ] Score tracking
+- [ ] Next sentence button
+
+---
+
+## 📅 DAY 5 — Blind Flow
+
+### 5.1 Voice-Controlled Hub (`Blind/pages/Blind.jsx`)
+- [ ] Import `SpeechRecognition`, `useSpeechRecognition`
+- [ ] Import `useNavigate`
+- [ ] **TTS helper:** `speak(text)` function using `SpeechSynthesisUtterance`
+- [ ] **Voice commands array:**
+  - "go to learning" → navigate `/blindvideos`
+  - "go to tutor" → navigate `/aitutor`
+  - "go to reader" → navigate to PDF reader
+  - "read page" → speak current page content
+  - "stop reading" → `speechSynthesis.cancel()`
+  - "go home" → navigate `/`
+- [ ] Announce page on mount: "Welcome to the main hub. Say a command."
+- [ ] **useEffect — transcript watcher:** match against commands
+- [ ] **UI — full screen dark layout:**
+  - [ ] `bg-gray-900 text-white min-h-screen`
+  - [ ] Heading: "Voice Navigation Hub"
+  - [ ] 6 large navigation cards in a grid:
+    - [ ] Card 1: "📖 PDF Reader" → `/blindvideos` — large icon + text
+    - [ ] Card 2: "🤖 AI Tutor" → `/aitutor`
+    - [ ] Card 3: "🎥 Videos" → `/blindvideos`
+    - [ ] Card 4: "📝 YouTube Summary" → `/youtubesummary`
+    - [ ] Card 5: "🎮 Quiz Game" → `/game1`
+    - [ ] Card 6: "💻 Code Viewer" → `/blindcode`
+  - [ ] Each card: large, high contrast, `bg-gray-800 rounded-xl p-8`
+  - [ ] Speak label on hover/focus via `onFocus={() => speak(label)}`
+  - [ ] Active listening indicator at top
+
+### 5.2 PDF Reader (`Blind/components/PDFReader.jsx`)
+- [ ] Import `pdfjs-dist`
+- [ ] Set worker source: `pdfjs.GlobalWorkerOptions.workerSrc = ...`
+- [ ] Create states: `pdfFile`, `pages[]`, `currentPage`, `totalPages`, `isReading`, `speechRate`
+- [ ] **File upload:**
+  - [ ] `<input type="file" accept=".pdf">`
+  - [ ] On change: read file as ArrayBuffer
+- [ ] **PDF parsing:**
+  - [ ] `pdfjs.getDocument(arrayBuffer)`
+  - [ ] Loop through pages: `pdf.getPage(i)` → `page.getTextContent()` → join items
+  - [ ] Store all page texts in `pages` array
+- [ ] **Text display:**
+  - [ ] Show current page text in a large readable font
+  - [ ] Page number indicator: "Page 2 of 15"
+- [ ] **Navigation buttons:**
+  - [ ] "Previous Page" button (disabled on page 1)
+  - [ ] "Next Page" button (disabled on last page)
+  - [ ] Page number input for jump-to
+- [ ] **Read Aloud feature:**
+  - [ ] "Read Page" button → create `SpeechSynthesisUtterance` with current page text
+  - [ ] Set `utterance.rate = speechRate`
+  - [ ] `speechSynthesis.speak(utterance)`
+  - [ ] "Stop Reading" button → `speechSynthesis.cancel()`
+- [ ] **Speed control:**
+  - [ ] Slider: 0.5x to 2.0x speed
+  - [ ] Display current speed
+- [ ] **UI styling:**
+  - [ ] Dark theme for blind users
+  - [ ] Large text: `text-xl`
+  - [ ] High contrast buttons
+  - [ ] ARIA labels on everything
+
+### 5.3 AI Tutor — Esmo (`Blind/components/Aitutor.jsx`)
+- [ ] Create states: `question`, `answer`, `isListening`, `isLoading`, `chatHistory[]`
+- [ ] **Speak function:** TTS helper
+- [ ] **Gemini API function:**
+  - [ ] Check `VITE_GEMINI_API_KEY`
+  - [ ] If exists: POST to `generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent`
+  - [ ] Parse response → return text
+  - [ ] If no key: return canned offline demo response
+- [ ] **Voice input:**
+  - [ ] Import `useSpeechRecognition`
+  - [ ] Hold spacebar → start listening
+  - [ ] Release → stop listening, send transcript as question
+- [ ] **Ask flow:**
+  - [ ] Set loading state
+  - [ ] Call Gemini API with question
+  - [ ] Add Q&A to chat history
+  - [ ] Speak the answer aloud
+- [ ] **UI:**
+  - [ ] Dark full-screen layout
+  - [ ] 3D robot area (use Spline embed `<iframe>` or a static robot illustration)
+  - [ ] Chat history: scrollable list of Q&A pairs
+  - [ ] Each question: right-aligned bubble
+  - [ ] Each answer: left-aligned bubble
+  - [ ] Input area at bottom: text input + mic button
+  - [ ] Loading indicator (pulsing dots)
+  - [ ] "Hold spacebar to speak" instruction
+  
+t
+### 5.4 Blind Navbar (`Blind/components/Navbar.jsx`)
+- [ ] Dark theme: `bg-gray-900`
+- [ ] Large text for accessibility
+- [ ] Navigation links with ARIA labels
+- [ ] Back button
+- [ ] Speak page title on focus
+
+### 5.5 Blind Sidebar (`Blind/components/Sidebar.jsx`)
+- [ ] Dark sidebar: `bg-gray-800`
+- [ ] Large icons + text
+- [ ] Active state highlighting
+- [ ] Links to all blind pages
+- [ ] Announce link name on hover/focus via TTS
+
+---
+
+## 📅 DAY 6 — YouTube + Games + Remaining Pages
+
+### 6.1 YouTube Voice Search (`Blind/components/Videos.jsx`)
+- [ ] Import `ReactPlayer` from `react-player`
+- [ ] Import `useSpeechRecognition`
+- [ ] Create states: `query`, `results[]`, `selectedVideo`, `isSearching`
+- [ ] **YouTube API search function:**
+  - [ ] Check `VITE_YOUTUBE_API_KEY`
+  - [ ] If exists: fetch from `googleapis.com/youtube/v3/search`
+  - [ ] If no key: return hardcoded demo results (5 videos with titles/IDs)
+- [ ] **Voice search flow:**
+  - [ ] Click mic button → start listening
+  - [ ] On transcript → set as query → call search
+- [ ] **Display results:**
+  - [ ] List of video cards: thumbnail + title
+  - [ ] Speak each title when focused
+  - [ ] Click to select → load in ReactPlayer
+- [ ] **Video player:**
+  - [ ] `<ReactPlayer url={selectedVideo.url} controls />`
+  - [ ] Full-width responsive
+
+  // today i am here upto here i have done the code Part
+
+### 6.2 YouTube Summary (`Blind/components/YoutubeSummary.jsx`)
+- [ ] Voice search for videos (similar to above)
+- [ ] Display video info (title, description, channel)
+- [ ] "Read Summary" button → speak description aloud
+- [ ] Text display of video details in high-contrast
+
+### 6.3 Geography Quiz (`Blind/components/Game1.jsx`)
+- [ ] Create quiz data: 15-20 geography questions
+  - Each: question text, 4 options, correct answer index
+- [ ] Create states: `currentQ`, `score`, `selectedAnswer`, `showResult`, `isGameOver`
+- [ ] **Accessibility features:**
+  - [ ] Read question aloud on display
+  - [ ] Read options aloud
+  - [ ] Announce correct/wrong after answer
+- [ ] **UI:**
+  - [ ] Large high-contrast cards
+  - [ ] Question displayed prominently
+  - [ ] 4 large option buttons
+  - [ ] Score display
+  - [ ] Progress: "Question 5 of 15"
+  - [ ] Game over screen with final score
+
+### 6.4 Calendar Page (`Deaf/components/Calender.jsx`)
+- [ ] Import `Calendar`, `dateFnsLocalizer` from `react-big-calendar`
+- [ ] Import `format`, `parse`, `startOfWeek`, `getDay` from `date-fns`
+- [ ] Import `react-big-calendar/lib/css/react-big-calendar.css`
+- [ ] Set up localizer with date-fns
+- [ ] Create demo events array: 5-10 events with start/end dates, title
+- [ ] Create state for events
+- [ ] **UI:**
+  - [ ] Full-page calendar: `<Calendar localizer={localizer} events={events} />`
+  - [ ] Set default view to "month"
+  - [ ] Style container height to fill page
+- [ ] Add new event form: date picker + title input + add button
+
+### 6.5 Canvas Drawing Page (`Deaf/pages/Canvas.jsx`)
+- [ ] Create canvas ref: `const canvasRef = useRef(null)`
+- [ ] Create states: `isDrawing`, `color`, `brushSize`, `tool` (pen/eraser)
+- [ ] **Mouse event handlers:**
+  - [ ] `onMouseDown`: start drawing, record start point
+  - [ ] `onMouseMove`: draw line from last point to current (if `isDrawing`)
+  - [ ] `onMouseUp`: stop drawing
+  - [ ] `onMouseLeave`: stop drawing
+- [ ] **Drawing function:** `ctx.lineTo(x, y)` → `ctx.stroke()`
+- [ ] **Toolbar:**
+  - [ ] Color picker: `<input type="color">`
+  - [ ] Brush size slider: range 1-20
+  - [ ] Pen button (active state)
+   
+  - [ ] Eraser button
+  - [ ] Clear all button: `ctx.clearRect(0, 0, width, height)`
+  - [ ] Undo button (store strokes in array, redraw without last one)
+- [ ] **Canvas element:** `<canvas>` filling the main content area
+- [ ] Set canvas size to fill container
+
+### 6.6 Visual Learning Page (`Deaf/pages/VisualLearning.jsx`)
+- [ ] Import `ReactPlayer`
+- [ ] Import Sidebar
+- [ ] Create layout: sidebar + content
+- [ ] Create array of demo video lessons:
+  - Each: title, description, YouTube URL, duration, category
+- [ ] Display in a grid: `grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`
+- [ ] Each video card:
+  - [ ] Thumbnail placeholder
+  - [ ] Title
+  - [ ] Duration badge
+  - [ ] Category tag
+  - [ ] "Watch" button
+- [ ] Video player modal/section when card clicked
+- [ ] `<ReactPlayer>` with selected video URL
+
+### 6.7 Meet Page (`Deaf/pages/Meet.jsx`)
+- [ ] Create a video meeting UI layout
+- [ ] Large video area (placeholder for own camera)
+- [ ] Smaller peer video area
+- [ ] Controls bar: mute mic, turn off camera, end call, chat
+- [ ] Participant list sidebar
+- [ ] Note: actual WebRTC can be complex — build UI shell, add "Demo Mode" notice
+
+### 6.8 Subtitle Generator (`Blind/pages/SubtitleGenerator.jsx`)
+- [ ] Text area input: "Paste your text here"
+- [ ] "Generate SRT" button
+- [ ] Split text into chunks (by sentences or every 5 seconds worth)
+- [ ] Format each chunk as SRT block: index, timecode, text
+- [ ] Display generated SRT in a code block
+- [ ] "Copy to Clipboard" button
+- [ ] "Download .srt" button
+
+### 6.9 Code Viewer (`Blind/pages/CodeViewer.jsx`)
+- [ ] Import `SyntaxHighlighter` from `react-syntax-highlighter`
+- [ ] Import a dark theme: `atomOneDark`
+- [ ] Text area: "Paste your code here"
+- [ ] Language selector dropdown: JavaScript, Python, HTML, CSS, etc.
+- [ ] "Highlight" button
+- [ ] Display code with syntax highlighting
+- [ ] "Read Code Aloud" button → speak the code via TTS
+- [ ] Line numbers display
+
+### 6.10 Accessibility Page (`Deaf/pages/Accessibility.jsx`)
+- [ ] List of accessibility features with toggle switches
+- [ ] High contrast mode toggle
+- [ ] Text size slider
+- [ ] Screen reader hint info
+- [ ] Keyboard shortcuts reference card
+
+### 6.11 Gamification Hub (`Deaf/pages/Gamification.jsx`)
+- [ ] Grid of game cards linking to different games
+- [ ] Each card: game icon, title, description, difficulty badge
+- [ ] Links to: `/canvas`, `/signgame`, `/game2`, quiz pages
+
+### 6.12 Universal Access Page (`Alluser/Home1.jsx`)
+- [ ] Landing-style page for all users
+- [ ] Feature cards for accessibility options
+- [ ] Links to both Deaf and Blind flows
+- [ ] General learning resources section
+
+### 6.13 Small Helper Components (Do quickly)
+- [ ] `Badges.jsx`: badge card display (reusable)
+- [ ] `Leaderboard.jsx`: ranked list component  
+- [ ] `Forum.jsx`: post list + create form
+- [ ] `Poll.jsx`: simple poll with vote buttons
+- [ ] `PremiumBanner.jsx`: upgrade CTA banner
+- [ ] `ProgressTracker.jsx`: progress ring/bar
+- [ ] `VideoLesson.jsx`: single video lesson card
+- [ ] `VideoPlayer.jsx`: ReactPlayer wrapper
+- [ ] `VisualAid.jsx`: image + description component
+- [ ] `VisualFeedback.jsx`: success/error feedback animation
+- [ ] `VisualNotification.jsx`: notification toast component
+- [ ] `VibrationAlert.jsx`: vibration API trigger component
+- [ ] `LiveChat.jsx`: simple chat UI
+
+---
+
+## 📅 DAY 7 — Polish + Animations + Final
+
+### 7.1 Add Framer Motion Animations to Every Page
+- [ ] Landing page: ✅ already done
+- [ ] Deaf dashboard: add fade-in to each section
+- [ ] Deaf sidebar: add slide-in from left
+- [ ] Sign language page: add tab transition
+- [ ] Fingerspell game: add card flip animations
+- [ ] Kanban board: add card entrance animations
+- [ ] Community page: add post entrance stagger
+- [ ] Blind hub: add card entrance stagger
+- [ ] PDF Reader: add page transition
+- [ ] AI Tutor: add message bubble animations
+- [ ] All game pages: add score pop animation
+- [ ] Profile page: add section fade-in
+
+### 7.2 Add Hover Effects
+- [ ] All buttons: `whileHover={{ scale: 1.05 }}` + `whileTap={{ scale: 0.95 }}`
+- [ ] All cards: `hover:shadow-xl transition-shadow`
+- [ ] Sidebar links: `hover:text-yellow-300 transition`
+- [ ] Nav links: `hover:underline` or `hover:text-color`
+- [ ] Table rows: `hover:bg-indigo-50`
+
+### 7.3 Add Toast Notifications
+- [ ] Add `<ToastContainer />` in `App.jsx`
+- [ ] Import `react-toastify/dist/ReactToastify.css` in `main.jsx`
+- [ ] Login success → `toast.success("Logged in!")`
+- [ ] Post created → `toast.success("Post created!")`
+- [ ] Lesson completed → `toast.success("Lesson completed!")`
+- [ ] API error → `toast.error("Something went wrong")`
+- [ ] Quiz correct answer → `toast.success("Correct!")`
+- [ ] Game over → `toast.info("Game Over! Score: ...")`
+
+### 7.4 Add Loading States
+- [ ] Create a reusable `<Spinner />` component (CSS spinning circle)
+- [ ] Show spinner while fetching API data
+- [ ] Show skeleton cards while loading (gray placeholder rectangles)
+- [ ] Add loading state to PDF parsing
+
+### 7.5 Add Empty States
+- [ ] "No posts yet" for empty forum
+- [ ] "No lessons completed" for empty progress
+- [ ] "No results found" for empty search
+- [ ] Each with a simple illustration or icon + text
+
+### 7.6 Mobile Responsive Pass
+- [ ] Landing page hero: stack columns on mobile (`flex-col` on small screens)
+- [ ] Landing page cards: single column on mobile
+- [ ] Sidebar: hidden on mobile, toggleable hamburger
+- [ ] Dashboard: single column charts on mobile
+- [ ] Tables: horizontal scroll on mobile
+- [ ] Kanban: vertical stack on mobile
+- [ ] All text: readable size on mobile (`text-sm` minimum)
+- [ ] All buttons: touch-friendly size (min 44px height)
+
+### 7.7 Error Handling
+- [ ] Wrap all API calls in try/catch
+- [ ] Show toast on error
+- [ ] Add fallback data if API fails
+- [ ] Handle WebRTC/camera permission denied
+- [ ] Handle speech recognition not supported
+
+### 7.8 Write README.md
+- [ ] Project title + description (2-3 sentences)
+- [ ] Feature list (bullet points)
+- [ ] Tech stack table (Layer → Tools)
+- [ ] Project structure tree (exact folder layout)
+- [ ] Quick start guide:
+  - [ ] Prerequisites (Node 18+, Chrome)
+  - [ ] Clone and install commands
+  - [ ] Run both servers commands
+  - [ ] Optional API keys section
+- [ ] Environment variables tables (frontend + backend)
+- [ ] Available scripts tables
+- [ ] Backend API endpoints table (all 12)
+- [ ] Routing map table (all 25+ routes)
+- [ ] Demo walkthrough (10-minute guided demo)
+- [ ] Troubleshooting section (5-6 common issues)
+- [ ] License + Credits
+
+### 7.9 Final Testing Checklist
+- [ ] `npm run dev` starts without errors
+- [ ] Backend `npm start` runs on port 5050
+- [ ] Landing page loads with all animations
+- [ ] All 3 pathway cards navigate correctly
+- [ ] Deaf auth camera/hand detection works
+- [ ] Blind auth voice recognition works in Chrome
+- [ ] Blind auth text fallback works in Firefox
+- [ ] Deaf dashboard shows charts correctly
+- [ ] Sidebar navigation works (all links)
+- [ ] Sidebar collapse/expand works
+- [ ] Tabs switch content correctly
+- [ ] Sign dictionary search returns results
+- [ ] Translator shows fingerspelling
+- [ ] Fingerspell game plays through
+- [ ] Kanban drag-and-drop works
+- [ ] Community page loads posts from API
+- [ ] Create post adds to list
+- [ ] Leaderboard shows sorted users
+- [ ] PDF upload extracts text
+- [ ] PDF read-aloud speaks text
+- [ ] AI Tutor responds (demo mode)
+- [ ] YouTube search returns results (demo mode)
+- [ ] Voice commands navigate correctly
+- [ ] Calendar renders with events
+- [ ] Canvas drawing works
+- [ ] Code viewer highlights syntax
+- [ ] Every route shows content (zero blank pages)
+- [ ] No console errors
+- [ ] Mobile responsive on 375px width
+- [ ] All offline fallbacks work (no API keys needed)
+
+---
+
+> **Total tasks: ~400+ micro-tasks across 7 days**
+> Print this out, check them off one by one. You've got this! 🚀

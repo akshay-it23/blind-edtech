@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import bgImage from "../../assets/dashback.png"
+import { motion } from "framer-motion";
 import {
   BarChart, LineChart, Bar, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
@@ -11,6 +12,13 @@ import {
 
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+
+const fadeIn = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6 }
+};
 
 export default function Deaf() {
 
@@ -74,8 +82,8 @@ export default function Deaf() {
 
   return (
     <div className="flex h-screen bg-gray-50">
-<div
-  className="absolute inset-0 bg-cover bg-center opacity-10 pointer-events-none"
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-10 pointer-events-none"
         style={{ backgroundImage: `url(${bgImage})` }}
       ></div>
 
@@ -86,14 +94,23 @@ export default function Deaf() {
 
         <div className="flex-1 overflow-y-auto p-6 ml-64 mt-14">
 
-          <h1 className="text-4xl font-black text-slate-900 tracking-tight">
+          <motion.h1 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="text-4xl font-black text-slate-900 tracking-tight"
+          >
             Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 underline decoration-yellow-400 decoration-4 underline-offset-8">{userData.name}!</span>
-          </h1>
+          </motion.h1>
 
-          <div className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-6 rounded-xl shadow mt-6">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2 }}
+            className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-6 rounded-xl shadow mt-6"
+          >
             <p className="text-5xl font-bold">{time}</p>
             <p className="text-xl">{date}</p>
-          </div>
+          </motion.div>
 
           <div className="flex gap-6 mt-6 border-b pb-2">
             <button
@@ -104,16 +121,6 @@ export default function Deaf() {
             >
               Learning Progress
             </button>
-
-
-
-
-
-
-
-
-
-
             <button
               onClick={() => setActiveTab("skills")}
               className={activeTab === "skills"
@@ -133,79 +140,81 @@ export default function Deaf() {
             </button>
           </div>
 
-{activeTab === "achievements" && (
-  <div className="mt-6 space-y-8">
+          {activeTab === "achievements" && (
+            <motion.div 
+              key="achievements"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-6 space-y-8"
+            >
+              <h2 className="text-2xl font-semibold flex items-center gap-2">
+                <Award /> Your Achievements
+              </h2>
 
-    <h2 className="text-2xl font-semibold flex items-center gap-2">
-      <Award /> Your Achievements
-    </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Badge 1 */}
+                <motion.div whileHover={{ scale: 1.05 }} className="bg-white p-4 rounded-xl shadow border-l-4 border-indigo-500">
+                  <h3 className="font-semibold">Signing Scholar</h3>
+                </motion.div>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Badge 2 */}
+                <motion.div whileHover={{ scale: 1.05 }} className="bg-white p-4 rounded-xl shadow border-l-4 border-yellow-400">
+                  <h3 className="font-semibold">Perfect Streak</h3>
+                </motion.div>
 
-      {/* Badge 1 */}
-      <div className="bg-white p-4 rounded-xl shadow border-l-4 border-indigo-500">
-        <h3 className="font-semibold">Signing Scholar</h3>
-      </div>
-
-      {/* Badge 2 */}
-      <div className="bg-white p-4 rounded-xl shadow border-l-4 border-yellow-400">
-        <h3 className="font-semibold">Perfect Streak</h3>
-      </div>
-
-      {/* Badge 3 */}
-      <div className="bg-white p-4 rounded-xl shadow border-l-4 border-green-500">
-        <h3 className="font-semibold">Community Guide</h3>
-      </div>
-
-    </div>
-
-  </div>
-)}
-
-
-{activeTab === "skills" && (
-  <div className="mt-6 space-y-8">
-
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
-      {/* LEFT - CHART */}
-      <div className="bg-white p-6 rounded-xl shadow-md">
-        <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
-          <Video /> Sign Language Proficiency
-        </h2>
-
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart layout="vertical" data={skillsData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis type="number" domain={[0, 100]} />
-            <YAxis dataKey="skill" type="category" />
-            <Tooltip />
-            <Bar dataKey="value" fill="#6366f1" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-
-      {/* RIGHT */}
-      <div className="bg-white p-6 rounded-xl shadow-md">
-        <h2 className="text-xl font-semibold mb-4">Vocabulary Progress</h2>
-        <p>Common Phrases - 78%</p>
-        <p>Academic Terms - 63%</p>
-      </div>
-
-    </div>
-
-  </div>
-)}
+                {/* Badge 3 */}
+                <motion.div whileHover={{ scale: 1.05 }} className="bg-white p-4 rounded-xl shadow border-l-4 border-green-500">
+                  <h3 className="font-semibold">Community Guide</h3>
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
 
 
+          {activeTab === "skills" && (
+            <motion.div 
+              key="skills"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-6 space-y-8"
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* LEFT - CHART */}
+                <div className="bg-white p-6 rounded-xl shadow-md">
+                  <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
+                    <Video /> Sign Language Proficiency
+                  </h2>
 
+                  <ResponsiveContainer width="100%" height={300}>
+                    <BarChart layout="vertical" data={skillsData}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis type="number" domain={[0, 100]} />
+                      <YAxis dataKey="skill" type="category" />
+                      <Tooltip />
+                      <Bar dataKey="value" fill="#6366f1" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
 
-
+                {/* RIGHT */}
+                <div className="bg-white p-6 rounded-xl shadow-md">
+                  <h2 className="text-xl font-semibold mb-4">Vocabulary Progress</h2>
+                  <p>Common Phrases - 78%</p>
+                  <p>Academic Terms - 63%</p>
+                </div>
+              </div>
+            </motion.div>
+          )}
 
           {activeTab === "progress" && (
-            <div className="mt-6 space-y-8">
+            <motion.div 
+              key="progress"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-6 space-y-8"
+            >
 
-              <div className="bg-white p-6 rounded-xl shadow-md">
+              <motion.div {...fadeIn} className="bg-white p-6 rounded-xl shadow-md">
                 <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
                   <Clock /> Recent Practice Sessions
                 </h2>
@@ -244,9 +253,9 @@ export default function Deaf() {
                     </tr>
                   </tbody>
                 </table>
-              </div>
+              </motion.div>
 
-              <div className="bg-white p-6 rounded-xl shadow-md">
+              <motion.div {...fadeIn} className="bg-white p-6 rounded-xl shadow-md">
                 <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
                   <Zap /> Weekly Learning Activity
                 </h2>
@@ -263,10 +272,10 @@ export default function Deaf() {
                     <Bar dataKey="reading" fill="#10b981" />
                   </BarChart>
                 </ResponsiveContainer>
-              </div>
+              </motion.div>
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-md">
+                <motion.div {...fadeIn} className="lg:col-span-2 bg-white p-6 rounded-xl shadow-md">
                   <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
                     <Book /> Monthly Progress
                   </h2>
@@ -280,9 +289,9 @@ export default function Deaf() {
                       <Line type="monotone" dataKey="progress" stroke="#6366f1" strokeWidth={2} />
                     </LineChart>
                   </ResponsiveContainer>
-                </div>
+                </motion.div>
 
-                <div className="bg-white p-6 rounded-xl shadow-md">
+                <motion.div {...fadeIn} className="bg-white p-6 rounded-xl shadow-md">
                   <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
                     <Award /> Points Summary
                   </h2>
@@ -300,10 +309,10 @@ export default function Deaf() {
                     </div>
                     <p className="text-sm mt-3 text-gray-500 font-medium italic">Only 122 points until Level {userData.level + 1}!</p>
                   </div>
-                </div>
+                </motion.div>
               </div>
 
-              <div className="bg-white p-6 rounded-xl shadow-md">
+              <motion.div {...fadeIn} className="bg-white p-6 rounded-xl shadow-md">
                 <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
                   <Calendar /> Upcoming Lessons
                 </h2>
@@ -342,9 +351,9 @@ export default function Deaf() {
                     </tr>
                   </tbody>
                 </table>
-              </div>
+              </motion.div>
 
-            </div>
+            </motion.div>
           )}
 
         </div>

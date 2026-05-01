@@ -1,2 +1,3 @@
 import React from "react";
-export default function VibrationAlert() { return <div>VibrationAlert</div>; }
+export default function VibrationAlert() {
+    const searchVideos = async (searchQuery) => { return <div>VibrationAlert</div>; }

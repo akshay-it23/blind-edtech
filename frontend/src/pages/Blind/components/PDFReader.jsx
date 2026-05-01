@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { BookOpen, FileUp, PauseCircle, PlayCircle, RotateCcw, Type } from "lucide-react";
 import * as pdfjsLib from "pdfjs-dist";
 import pdfWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
@@ -116,9 +117,17 @@ export default function PDFReader() {
 	};
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 px-4 py-8 text-white sm:px-6 lg:px-8">
+		<motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 px-4 py-8 text-white sm:px-6 lg:px-8"
+    >
 			<div className="mx-auto flex w-full max-w-7xl flex-col gap-6">
-				<section className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-cyan-950/30 backdrop-blur-xl sm:p-8">
+				<motion.section 
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-cyan-950/30 backdrop-blur-xl sm:p-8"
+        >
 					<div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
 						<div className="max-w-3xl">
 							<div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100">
@@ -146,16 +155,25 @@ export default function PDFReader() {
 							</div>
 						</div>
 					</div>
-				</section>
+				</motion.section>
 
 				{loadError ? (
-					<div className="rounded-2xl border border-rose-400/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+					<motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="rounded-2xl border border-rose-400/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-200"
+          >
 						{loadError}
-					</div>
+					</motion.div>
 				) : null}
 
 				<div className="grid gap-6 lg:grid-cols-[360px_minmax(0,1fr)]">
-					<aside className="space-y-6 rounded-[1.75rem] border border-white/10 bg-slate-900/75 p-6 shadow-xl backdrop-blur-xl">
+					<motion.aside 
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="space-y-6 rounded-[1.75rem] border border-white/10 bg-slate-900/75 p-6 shadow-xl backdrop-blur-xl"
+          >
 						<div>
 							<label className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-200">
 								<FileUp className="h-4 w-4 text-cyan-300" />
@@ -185,23 +203,29 @@ export default function PDFReader() {
 						</div>
 
 						<div className="grid grid-cols-2 gap-3">
-							<button
+							<motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
 								type="button"
 								onClick={speakText}
 								className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-500 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400"
 							>
 								<PlayCircle className="h-4 w-4" />
 								Read
-							</button>
-							<button
+							</motion.button>
+							<motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
 								type="button"
 								onClick={stopSpeaking}
 								className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
 							>
 								<PauseCircle className="h-4 w-4" />
 								Stop
-							</button>
-							<button
+							</motion.button>
+							<motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
 								type="button"
 								onClick={speakPdf}
 								disabled={!extractedText || isLoadingPdf}
@@ -209,49 +233,68 @@ export default function PDFReader() {
 							>
 								<BookOpen className="h-4 w-4" />
 								{isLoadingPdf ? "Reading PDF..." : "Read PDF"}
-							</button>
-							<button
+							</motion.button>
+							<motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
 								type="button"
 								onClick={resetReader}
 								className="col-span-2 inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
 							>
 								<RotateCcw className="h-4 w-4" />
 								Reset
-							</button>
+							</motion.button>
 						</div>
 
 						{isLoadingPdf ? (
-							<p className="text-sm text-cyan-200">Loading and extracting text from the PDF...</p>
+							<p className="text-sm text-cyan-200 animate-pulse">Loading and extracting text from the PDF...</p>
 						) : extractedText ? (
 							<p className="text-sm text-emerald-300">PDF text extracted successfully. Use Read PDF to hear it aloud.</p>
 						) : null}
-					</aside>
+					</motion.aside>
 
 					<main className="grid gap-6">
-						<section className="rounded-[1.75rem] border border-white/10 bg-white/5 p-4 shadow-xl backdrop-blur-xl sm:p-6">
-							{fileUrl ? (
-								<iframe
-									title="PDF preview"
-									src={fileUrl}
-									className="min-h-[70vh] w-full rounded-[1.25rem] border border-white/10 bg-white"
-								/>
-							) : (
-								<div className="flex min-h-[70vh] items-center justify-center rounded-[1.25rem] border border-dashed border-white/15 bg-slate-950/40 p-8 text-center">
-									<div className="max-w-md">
-										<div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-400/15 text-cyan-200 ring-1 ring-cyan-300/20">
-											<BookOpen className="h-8 w-8" />
-										</div>
-										<h2 className="text-2xl font-bold text-white">No PDF loaded yet</h2>
-										<p className="mt-3 text-sm leading-6 text-slate-300">
-											Upload a PDF to preview it here. If you only need the audio reader, you can still paste text on the left and press Read.
-										</p>
-									</div>
-								</div>
-							)}
-						</section>
+						<motion.section 
+              initial={{ x: 20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="rounded-[1.75rem] border border-white/10 bg-white/5 p-4 shadow-xl backdrop-blur-xl sm:p-6"
+            >
+              <AnimatePresence mode="wait">
+                {fileUrl ? (
+                  <motion.iframe
+                    key={fileUrl}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 1.05 }}
+                    title="PDF preview"
+                    src={fileUrl}
+                    className="min-h-[70vh] w-full rounded-[1.25rem] border border-white/10 bg-white"
+                  />
+                ) : (
+                  <motion.div 
+                    key="empty"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="flex min-h-[70vh] items-center justify-center rounded-[1.25rem] border border-dashed border-white/15 bg-slate-950/40 p-8 text-center"
+                  >
+                    <div className="max-w-md">
+                      <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-400/15 text-cyan-200 ring-1 ring-cyan-300/20">
+                        <BookOpen className="h-8 w-8" />
+                      </div>
+                      <h2 className="text-2xl font-bold text-white">No PDF loaded yet</h2>
+                      <p className="mt-3 text-sm leading-6 text-slate-300">
+                        Upload a PDF to preview it here. If you only need the audio reader, you can still paste text on the left and press Read.
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+						</motion.section>
 					</main>
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 }
+

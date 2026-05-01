@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const WORDS = {
   easy: ["cat", "dog", "sun", "hat"],
@@ -16,6 +17,7 @@ const Fingerspell = () => {
   const [timeLeft, setTimeLeft] = useState(30);
   const [isPlaying, setIsPlaying] = useState(false);
   const [round, setRound] = useState(1);
+  const [isCorrect, setIsCorrect] = useState(null);
   const userInputRef = useRef("");
 
   const getTimeForDifficulty = (level) => {
@@ -54,21 +56,25 @@ const Fingerspell = () => {
 
   const handleSubmit = useCallback(() => {
     const answer = userInputRef.current.trim().toLowerCase();
-    const isCorrect = answer === currentWord.toLowerCase();
-    setScore((prev) => prev + (isCorrect ? 10 : -5));
+    const correct = answer === currentWord.toLowerCase();
+    setIsCorrect(correct);
+    setScore((prev) => prev + (correct ? 10 : -5));
 
-    if (round >= MAX_ROUNDS) {
-      setRound(MAX_ROUNDS + 1);
+    setTimeout(() => {
+      setIsCorrect(null);
+      if (round >= MAX_ROUNDS) {
+        setRound(MAX_ROUNDS + 1);
+        setUserInput("");
+        userInputRef.current = "";
+        return;
+      }
+
       setUserInput("");
       userInputRef.current = "";
-      return;
-    }
-
-    setUserInput("");
-    userInputRef.current = "";
-    setRound((prev) => prev + 1);
-    setTimeLeft(getTimeForDifficulty(difficulty));
-    pickWord(difficulty);
+      setRound((prev) => prev + 1);
+      setTimeLeft(getTimeForDifficulty(difficulty));
+      pickWord(difficulty);
+    }, 1000);
   }, [currentWord, round, difficulty, pickWord]);
 
   useEffect(() => {
@@ -90,68 +96,120 @@ const Fingerspell = () => {
 
   if (round > MAX_ROUNDS) {
     return (
-      <div className="text-center text-white">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="text-center text-white"
+      >
         <h2 className="text-3xl mb-4">Game Over</h2>
-        <h3 className="text-xl mb-4">Score: {score}</h3>
-        <button onClick={resetToMenu} className="bg-blue-500 px-4 py-2 rounded">
+        <motion.h3 
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
+          className="text-xl mb-4"
+        >
+          Final Score: {score}
+        </motion.h3>
+        <button onClick={resetToMenu} className="bg-indigo-600 hover:bg-indigo-500 px-6 py-3 rounded-xl font-bold transition-colors">
           Play Again
         </button>
-      </div>
+      </motion.div>
     );
   }
 
   if (!isPlaying) {
     return (
       <div className="text-center text-white">
-        <h2 className="text-2xl mb-4">Choose Difficulty</h2>
-
-        <button
-          onClick={() => startGame("easy")}
-          className="bg-green-500 px-4 py-2 m-2 rounded"
+        <motion.h2 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-2xl mb-6"
         >
-          Easy
-        </button>
+          Choose Difficulty
+        </motion.h2>
 
-        <button
-          onClick={() => startGame("medium")}
-          className="bg-yellow-500 px-4 py-2 m-2 rounded"
-        >
-          Medium
-        </button>
-
-        <button
-          onClick={() => startGame("hard")}
-          className="bg-red-500 px-4 py-2 m-2 rounded"
-        >
-          Hard
-        </button>
+        <div className="flex justify-center gap-4">
+          {["easy", "medium", "hard"].map((level) => (
+            <motion.button
+              key={level}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => startGame(level)}
+              className={`${
+                level === "easy" ? "bg-green-500" : level === "medium" ? "bg-yellow-500" : "bg-red-500"
+              } px-6 py-2 rounded-xl font-bold capitalize shadow-lg`}
+            >
+              {level}
+            </motion.button>
+          ))}
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="text-center text-white">
-      <h2 className="text-xl mb-2">Time Left: {timeLeft}s</h2>
-      <h2 className="text-xl mb-2">Score: {score}</h2>
-      <h2 className="text-xl mb-4">Round: {round}</h2>
+    <div className="text-center text-white max-w-md mx-auto">
+      <div className="flex justify-between items-center mb-8">
+        <div className="text-left">
+          <p className="text-slate-400 text-sm uppercase font-bold">Round</p>
+          <p className="text-2xl font-black">{round} / {MAX_ROUNDS}</p>
+        </div>
+        <div className="text-center">
+          <p className="text-slate-400 text-sm uppercase font-bold">Time</p>
+          <p className={`text-2xl font-black ${timeLeft < 5 ? "text-red-500 animate-pulse" : ""}`}>{timeLeft}s</p>
+        </div>
+        <div className="text-right">
+          <p className="text-slate-400 text-sm uppercase font-bold">Score</p>
+          <AnimatePresence mode="wait">
+            <motion.p 
+              key={score}
+              initial={{ scale: 1.5, color: "#fff" }}
+              animate={{ scale: 1, color: isCorrect === true ? "#4ade80" : isCorrect === false ? "#f87171" : "#fff" }}
+              className="text-2xl font-black"
+            >
+              {score}
+            </motion.p>
+          </AnimatePresence>
+        </div>
+      </div>
 
-      <h1 className="text-3xl mb-4">{currentWord}</h1>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentWord}
+          initial={{ rotateY: 90, opacity: 0 }}
+          animate={{ rotateY: 0, opacity: 1 }}
+          exit={{ rotateY: -90, opacity: 0 }}
+          transition={{ duration: 0.4 }}
+          className="bg-white/10 p-8 rounded-3xl border border-white/20 mb-8"
+        >
+          <h1 className="text-5xl font-black tracking-widest uppercase">{currentWord}</h1>
+        </motion.div>
+      </AnimatePresence>
 
-      <input
-        value={userInput}
-        onChange={(e) => {
-          setUserInput(e.target.value);
-          userInputRef.current = e.target.value;
-        }}
-        className="p-2 text-black rounded"
-        placeholder="Type spelling..."
-      />
+      <div className="flex gap-2">
+        <input
+          value={userInput}
+          autoFocus
+          onChange={(e) => {
+            setUserInput(e.target.value);
+            userInputRef.current = e.target.value;
+          }}
+          className="flex-1 p-4 bg-white/10 border border-white/20 rounded-2xl text-white text-xl outline-none focus:border-indigo-500 transition-colors"
+          placeholder="Type spelling..."
+          onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
+        />
 
-      <button onClick={handleSubmit} className="ml-2 bg-blue-500 px-4 py-2 rounded">
-        Submit
-      </button>
+        <motion.button 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={handleSubmit} 
+          className="bg-indigo-600 px-8 py-4 rounded-2xl font-bold shadow-lg hover:bg-indigo-500 transition-colors"
+        >
+          Submit
+        </motion.button>
+      </div>
     </div>
   );
 };
 
 export default Fingerspell;
+

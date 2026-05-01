@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Trophy, RefreshCw, HelpCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function PuzzleGame() {
   const [tiles, setTiles] = useState([]);
@@ -13,7 +14,6 @@ export default function PuzzleGame() {
       { id: 7, val: "G", pos: 6 }, { id: 8, val: "H", pos: 7 }, { id: 0, val: "", pos: 8 }, // Blank
     ];
     
-    // Shuffle logic (ensuring it's solvable for a real puzzle, but for demo we just shuffle)
     const shuffled = [...initialTiles].sort(() => Math.random() - 0.5);
     setTiles(shuffled.map((t, i) => ({ ...t, currentPos: i })));
     setMoves(0);
@@ -38,15 +38,22 @@ export default function PuzzleGame() {
       setTiles(newTiles);
       setMoves(moves + 1);
       
-      // Check win condition
       const isWin = newTiles.every((t, i) => t.id === (i + 1) % 9);
       if (isWin) setComplete(true);
     }
   };
 
   return (
-    <div className="flex flex-col items-center gap-6 text-white p-4">
-      <div className="flex justify-between w-full max-w-md items-center mb-4">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="flex flex-col items-center gap-6 text-white p-4"
+    >
+      <motion.div 
+        initial={{ y: -20 }}
+        animate={{ y: 0 }}
+        className="flex justify-between w-full max-w-md items-center mb-4"
+      >
         <div>
           <h2 className="text-3xl font-bold flex items-center gap-2">
             <HelpCircle className="text-yellow-400" />
@@ -54,50 +61,80 @@ export default function PuzzleGame() {
           </h2>
           <p className="text-gray-400">Order the alphabet signs</p>
         </div>
-        <div className="bg-white/10 px-4 py-2 rounded-xl text-center">
+        <div className="bg-white/10 px-4 py-2 rounded-xl text-center border border-white/10">
           <p className="text-xs uppercase text-gray-500">Moves</p>
-          <p className="text-2xl font-bold font-mono">{moves}</p>
+          <motion.p 
+            key={moves}
+            initial={{ scale: 1.5, color: "#fbbf24" }}
+            animate={{ scale: 1, color: "#fff" }}
+            className="text-2xl font-bold font-mono"
+          >
+            {moves}
+          </motion.p>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="grid grid-cols-3 gap-3 bg-white/5 p-4 rounded-3xl border border-white/10 shadow-2xl">
+      <motion.div 
+        layout
+        className="grid grid-cols-3 gap-3 bg-white/5 p-4 rounded-3xl border border-white/10 shadow-2xl backdrop-blur-md"
+      >
         {tiles.map((tile, idx) => (
-          <button
+          <motion.button
+            layout
             key={tile.id}
+            whileHover={tile.id !== 0 ? { scale: 1.05 } : {}}
+            whileTap={tile.id !== 0 ? { scale: 0.95 } : {}}
             onClick={() => handleTileClick(idx)}
-            className={`w-24 h-24 sm:w-32 sm:h-32 rounded-2xl text-4xl font-black transition-all flex items-center justify-center ${
+            className={`w-24 h-24 sm:w-32 sm:h-32 rounded-2xl text-4xl font-black transition-colors flex items-center justify-center ${
               tile.id === 0 
               ? 'bg-transparent border-2 border-dashed border-white/10 cursor-default' 
-              : 'bg-indigo-600 hover:bg-indigo-500 shadow-lg active:scale-95 border-b-4 border-indigo-800'
+              : 'bg-indigo-600 hover:bg-indigo-500 shadow-lg border-b-4 border-indigo-800'
             }`}
           >
             {tile.val}
-          </button>
+          </motion.button>
         ))}
-      </div>
+      </motion.div>
 
       <div className="flex gap-4 mt-4">
-        <button 
+        <motion.button 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={initializeGame}
-          className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-xl font-bold transition-colors"
+          className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-xl font-bold transition-colors border border-white/10 shadow-lg"
         >
           <RefreshCw size={20} /> Reset
-        </button>
+        </motion.button>
       </div>
 
-      {complete && (
-        <div className="fixed inset-0 bg-indigo-900/90 backdrop-blur-md flex flex-col items-center justify-center z-[100] animate-in fade-in zoom-in duration-500">
-          <Trophy size={100} className="text-yellow-400 mb-6 animate-bounce" />
-          <h2 className="text-5xl font-black mb-2">Puzzle Solved!</h2>
-          <p className="text-2xl mb-8">Completed in {moves} moves</p>
-          <button 
-            onClick={initializeGame}
-            className="bg-white text-indigo-900 px-12 py-4 rounded-2xl font-black text-2xl hover:scale-105 transition-transform shadow-2xl"
+      <AnimatePresence>
+        {complete && (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            className="fixed inset-0 bg-indigo-950/95 backdrop-blur-xl flex flex-col items-center justify-center z-[100] p-6 text-center"
           >
-            Play Again
-          </button>
-        </div>
-      )}
-    </div>
+            <motion.div
+              animate={{ rotate: [0, -10, 10, -10, 10, 0], scale: [1, 1.2, 1] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              <Trophy size={120} className="text-yellow-400 mb-6" />
+            </motion.div>
+            <h2 className="text-6xl font-black mb-2 text-white">Puzzle Solved!</h2>
+            <p className="text-3xl mb-8 text-indigo-200">Completed in <span className="text-white font-mono">{moves}</span> moves</p>
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={initializeGame}
+              className="bg-white text-indigo-950 px-12 py-4 rounded-2xl font-black text-2xl hover:bg-gray-100 transition-colors shadow-2xl"
+            >
+              Play Again
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }
+

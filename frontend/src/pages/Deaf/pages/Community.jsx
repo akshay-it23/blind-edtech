@@ -1,6 +1,22 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import Sidebar from "../components/Sidebar";
-import communityBg from "../assets/community.png";
+import communityBg from "../../Alluser/assest/community.png";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
 
 const Community = () => {
   const [posts, setPosts] = useState([]);
@@ -112,7 +128,9 @@ const Community = () => {
       <Sidebar />
 
       <div className="relative z-10 ml-20 min-h-screen p-4 md:ml-64 md:p-8">
-        <div
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
           className="relative mb-8 h-44 overflow-hidden rounded-2xl border border-slate-200"
           style={{
             backgroundImage: `url(${communityBg})`,
@@ -129,7 +147,7 @@ const Community = () => {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         <div className="mb-10 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
           <h2 className="mb-4 text-xl font-semibold text-slate-800">Forum</h2>
@@ -161,24 +179,36 @@ const Community = () => {
             </button>
           </div>
 
-          {posts.map((post) => {
-            const normalized = normalizePost(post);
-            return (
-              <div
-                key={post.id}
-                className="mb-3 rounded-lg border border-slate-200 bg-white p-4 shadow-sm"
-              >
-                <h3 className="font-semibold text-slate-900">{normalized.title}</h3>
-                <p className="mt-1 text-slate-700">{normalized.body}</p>
-                <p className="mt-2 text-sm text-slate-500">
-                  {normalized.authorName} • {normalized.dateLabel} • {normalized.replyCount} replies
-                </p>
-              </div>
-            );
-          })}
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {posts.map((post) => {
+              const normalized = normalizePost(post);
+              return (
+                <motion.div
+                  key={post.id}
+                  variants={itemVariants}
+                  className="mb-3 rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <h3 className="font-semibold text-slate-900">{normalized.title}</h3>
+                  <p className="mt-1 text-slate-700">{normalized.body}</p>
+                  <p className="mt-2 text-sm text-slate-500">
+                    {normalized.authorName} • {normalized.dateLabel} • {normalized.replyCount} replies
+                  </p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
 
-        <div className="mb-10 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-10 rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+        >
           <h2 className="mb-4 text-xl font-semibold text-slate-800">Leaderboard</h2>
 
           {leaders.map((user, index) => {
@@ -188,38 +218,54 @@ const Community = () => {
             else if (index === 2) color = "bg-orange-400";
 
             return (
-              <div key={user.id} className="mb-2 flex items-center gap-3 rounded-md bg-slate-50 px-3 py-2">
+              <motion.div 
+                key={user.id} 
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className="mb-2 flex items-center gap-3 rounded-md bg-slate-50 px-3 py-2"
+              >
                 <div className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-semibold ${color}`}>
                   {index + 1}
                 </div>
                 <span className="text-slate-800">{user.name}</span>
                 <span className="ml-auto font-medium text-slate-700">{user.points} pts</span>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
-        <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+        >
           <h2 className="mb-4 text-xl font-semibold text-slate-800">Badges</h2>
 
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {badges.map((badge) => (
-              <div
+            {badges.map((badge, idx) => (
+              <motion.div
                 key={badge.id}
-                className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-center"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: idx * 0.05 }}
+                whileHover={{ scale: 1.05 }}
+                className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-center cursor-default"
               >
                 <div className="text-2xl text-slate-700">{badge.icon}</div>
                 <h3 className="mt-2 font-semibold text-slate-900">{badge.name}</h3>
                 <p className="text-sm text-slate-500">
                   {badge.description || "Milestone unlocked in your learning journey."}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
 };
 
 export default Community;
+

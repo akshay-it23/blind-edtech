@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Code, ArrowLeft, Play, Volume2, Info } from "lucide-react";
+import { Code, ArrowLeft, Volume2, Info } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -18,7 +18,7 @@ export default function CodeViewer() {
       title: "CSS Flexbox",
       language: "css",
       code: ".container {\n  display: flex;\n  justify-content: center;\n}",
-      explanation: "This CSS rule centers child elements horizontally within a container using travel display flex and justify content center."
+      explanation: "This CSS rule centers child elements horizontally within a container using display flex and justify content center."
     },
     {
         title: "Python Loop",

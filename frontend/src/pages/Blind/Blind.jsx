@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -14,6 +15,26 @@ import {
   Code2,
   PlayCircle,
 } from "lucide-react";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.9, y: 20 },
+  visible: { 
+    opacity: 1, 
+    scale: 1, 
+    y: 0,
+    transition: { type: "spring", stiffness: 300, damping: 24 }
+  }
+};
 
 const Blind = () => {
   const navigate = useNavigate();
@@ -142,8 +163,17 @@ const Blind = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.18),_transparent_30%),radial-gradient(circle_at_top_right,_rgba(168,85,247,0.16),_transparent_30%),radial-gradient(circle_at_bottom,_rgba(14,165,233,0.12),_transparent_35%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] opacity-30" />
 
-      <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">
-        <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-cyan-950/20 backdrop-blur-xl sm:p-8">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="relative mx-auto flex min-h-screen max-w-7xl flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8"
+      >
+        <motion.div 
+          initial={{ y: -30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-cyan-950/20 backdrop-blur-xl sm:p-8"
+        >
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-100">
@@ -187,21 +217,29 @@ const Blind = () => {
             <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">Say: go to reader</span>
             <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">Say: go home</span>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
+        >
           {hubCards.map((card) => {
             const Icon = card.icon;
 
             return (
-              <button
+              <motion.button
                 key={card.title}
+                variants={cardVariants}
+                whileHover={{ scale: 1.02, y: -5 }}
+                whileTap={{ scale: 0.98 }}
                 type="button"
                 tabIndex={0}
                 onClick={() => navigate(card.to)}
                 onFocus={() => speak(card.title)}
                 onMouseEnter={() => speak(card.title)}
-                className={`group rounded-[1.75rem] border bg-gradient-to-br ${card.accent} p-[1px] text-left transition duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-cyan-300/70`}
+                className={`group rounded-[1.75rem] border bg-gradient-to-br ${card.accent} p-[1px] text-left focus:outline-none focus:ring-2 focus:ring-cyan-300/70 h-full`}
               >
                 <div className="flex h-full flex-col rounded-[1.7rem] border border-white/10 bg-slate-950/85 p-6 shadow-xl shadow-black/20 backdrop-blur-xl transition group-hover:bg-slate-900/90">
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-white ring-1 ring-white/10">
@@ -214,29 +252,39 @@ const Blind = () => {
                     <span aria-hidden="true">→</span>
                   </div>
                 </div>
-              </button>
+              </motion.button>
             );
           })}
-        </div>
+        </motion.div>
 
         <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
+          >
             <h3 className="text-lg font-semibold text-white">Voice feedback</h3>
             <p className="mt-2 text-sm leading-6 text-slate-300">
               {transcript ? transcript : "Speak a command and it will appear here before navigation happens."}
             </p>
-          </div>
+          </motion.div>
 
-          <div className="rounded-[1.75rem] border border-white/10 bg-slate-900/70 p-6 backdrop-blur-xl">
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="rounded-[1.75rem] border border-white/10 bg-slate-900/70 p-6 backdrop-blur-xl"
+          >
             <h3 className="text-lg font-semibold text-white">Quick start</h3>
             <ul className="mt-4 space-y-3 text-sm text-slate-300">
               <li>1. Use the cards for direct navigation.</li>
               <li>2. Say a command to move hands-free.</li>
               <li>3. Press the microphone if your browser supports it.</li>
             </ul>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
