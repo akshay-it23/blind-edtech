@@ -1,16 +1,69 @@
-# React + Vite
+# Frontend — My-Ed-Tech
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite + TailwindCSS frontend for the My-Ed-Tech accessible education platform.
 
-Currently, two official plugins are available:
+## 🚀 Quick Start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+# Install dependencies
+npm install
 
-## React Compiler
+# Start development server
+npm run dev
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# Build for production
+npm run build
 
-## Expanding the ESLint configuration
+# Preview production build
+npm run preview
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📦 Dependencies
+
+- **React 19** — UI framework
+- **Vite** — Build tool with HMR
+- **TailwindCSS** — Styling
+- **Framer Motion** — Animations
+- **React Router v7** — Client-side routing
+- **react-toastify** — Notifications
+- **react-speech-recognition** — Voice input
+- **react-player** — Video playback
+- **pdfjs-dist** — PDF reading
+- **recharts** — Data visualization
+- **@hello-pangea/dnd** — Drag & drop
+
+## 📂 Project Structure
+
+```
+src/
+├── pages/          # Full-screen page components
+├── components/     # Reusable UI components
+├── layout/         # Layout wrappers
+├── routes/         # Route definitions
+├── context/        # Global state
+├── utils/          # Helper functions
+├── hooks/          # Custom hooks
+├── assets/         # Images, fonts
+├── App.jsx         # Root component
+└── main.jsx        # Entry point
+```
+
+## 🔑 Environment Variables
+
+Create `.env.local`:
+```env
+VITE_API_URL=http://localhost:5050/api
+VITE_YOUTUBE_API_KEY=your_key
+VITE_GEMINI_API_KEY=your_key
+```
+
+## 🛠 Available Commands
+
+- `npm run dev` — Start development server
+- `npm run build` — Production build
+- `npm run lint` — ESLint checks
+- `npm run preview` — Preview production build
+
+## 📖 Documentation
+
+See [main README](../README.md) for full project documentation.

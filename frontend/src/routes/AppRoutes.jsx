@@ -20,6 +20,7 @@ import DProfile from "../pages/Deaf/components/DProfile";
 import Signgame from "../pages/Deaf/components/Signgame";
 import SentanceGames from "../pages/Deaf/components/SentanceGames";
 import InteractiveQuiz from "../pages/Deaf/components/InteractiveQuiz";
+import Calender from "../pages/Deaf/components/Calender";
 // Blind
 import AuthBlind from "../pages/Blind/components/AuthBlind";
 import BlindHub from "../pages/Blind/pages/Blind";
@@ -55,9 +56,9 @@ export default function AppRoutes() {
         <Route path="/signgame" element={<Signgame />} />
         <Route path="/deaf-meet" element={<Meet />} />
         <Route path="/deaf-planyourday" element={<PlanYourDay />} />
-           <Route path="/deaf/interactive" element={<InteractiveQuiz />} />
+        <Route path="/calendar" element={<Calender />} />
+        <Route path="/deaf/interactive" element={<InteractiveQuiz />} />
         <Route path="/game2" element={<SentanceGames />} />
-   
 
         {/* Blind */}
         <Route path="/authblind" element={<AuthBlind />} />

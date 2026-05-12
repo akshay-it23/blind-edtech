@@ -32,7 +32,7 @@ export default function Deaf() {
     }, 1000);
 
     // Fetch user data from local API
-    fetch("http://localhost:5050/api/users/u1")
+    fetch(`${import.meta.env.VITE_API_BASE_URL || "http://localhost:5050/api"}/users/u1`)
       .then(res => res.json())
       .then(data => setUserData(data))
       .catch(err => console.log("Backend not running, using mock data"));
